@@ -15,7 +15,7 @@ server = app.server
 
 app.title = 'Notas CETEC Augusto Marques dos Passos'
 
-df = pd.read_csv('df_notas_cetec_augusto.csv')
+df = pd.read_csv('src/df_notas_cetec_augusto.csv')
 
 lista_anos = df['Ano'].unique().tolist()
 lista_disciplinas = sorted(df['Disciplina'].unique().tolist())
