@@ -1,8 +1,10 @@
 from dash import Dash, dcc, html, Output, Input, State, dash_table
-
 import dash_bootstrap_components as dbc
+
 import pandas as pd
+
 import plotly.express as px
+import plotly.graph_objects as go
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.LUMEN],
             meta_tags=[{'name': 'viewport',
@@ -16,6 +18,7 @@ server = app.server
 app.title = 'Notas CETEC Augusto Marques dos Passos'
 
 df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
+# df = pd.read_csv('src/df_notas_cetec_augusto.csv')
 
 lista_anos = df['Ano'].unique().tolist()
 lista_disciplinas = sorted(df['Disciplina'].unique().tolist())
@@ -46,6 +49,7 @@ for a in lista_anos:
         for p in lista_periodos:
             query = "Ano == \'" + a + "\' & Disciplina == \'"+ d + "\' & Período == \'" + p + "\'"
             dff = df.query(query).sort_values(by=['Avaliação'], ascending=False)
+            dff = dff[dff['Avaliação'] != 'Média da Turma']
             soma += dff['Nota'].sum()
 
             addRowinTotals(a, d, p, float("{:.1f}".format(dff['Nota'].sum())))
@@ -109,6 +113,8 @@ app.layout = dbc.Container(
             ], style=dict(display='flex')
         ),
 
+        dcc.Graph(id="graph_comparativo"),        
+
         dcc.Graph(id="graph_pie"),
         html.Div(id="id_tabela", style={"text-align": "center", "font-size": "0.875em"}),
         html.Div(id="nothing")
@@ -130,6 +136,7 @@ def showTotalsTable(check):
 @app.callback(
     [
         Output("graph_histogram", "figure"),
+        Output("graph_comparativo", "figure"),
         Output("graph_pie", "figure"),
         Output("id_tabela", "children"),
         Output("nothing", "disable_n_clicks")
@@ -147,6 +154,8 @@ def update_graphs(ano, periodo, disciplina, parciais):
 
     query = "Ano == \'" + ano + "\'"
     dff = df.query(query).sort_values(by=['Disciplina', 'Período'])
+
+    dff = dff[dff['Avaliação'] != 'Média da Turma']
 
     if parciais:
         dff = pd.DataFrame(dff.groupby(by=['Disciplina', 'Período', 'Avaliação'])['Nota'].sum())
@@ -174,8 +183,31 @@ def update_graphs(ano, periodo, disciplina, parciais):
             # plot_bgcolor = 'rgba(0,0,0,0)',
         )
 
+
+
+    titulo_comparativo = "Comparativo com a Média da Turma no " + periodo
+
+    query = "Ano == \'" + ano + "\' & Período == \'" + periodo + "\'"
+    dff = df.query(query).sort_values(by=['Disciplina', 'Período'])
+
+    dfm = dff[dff['Avaliação'] == 'Média da Turma']
+    dfm = dfm.dropna(subset = ['Nota'])
+
+    dt = dtotals.query(query).sort_values(by=['Disciplina', 'Período'])
+
+    fig_comparativo = px.line_3d(x=dt['Disciplina'], y=dt['Nota'], color_discrete_sequence =['LightSeaGreen']).update_layout(
+            title={"text": titulo_comparativo, "x": 0.5}, yaxis_title="Nota", xaxis_title="Disciplina",
+            paper_bgcolor = 'rgba(0,0,0,0)')
+
+    fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], name="Nota no " + periodo, marker=dict(color="LightSeaGreen"))
+    fig_comparativo.add_scatter(x=dfm['Disciplina'], y=dfm['Nota'], name="Média da Turma", marker=dict(color="LightSalmon"))
+
+
+
+
     query = "Ano == \'" + ano + "\' & Disciplina == \'"+ disciplina + "\' & Período == \'" + periodo + "\'"
     dff = df.query(query).sort_values(by=['Avaliação'])
+    dff = dff[dff['Avaliação'] != 'Média da Turma']
 
     soma = float("{:.1f}".format(dff['Nota'].sum()))
 
@@ -191,7 +223,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
 
     table = dbc.Table.from_dataframe(dff.dropna(subset = ['Nota']), responsive=True, striped=True, bordered=True, hover=True)
 
-    return fig_histogram, fig_pie, table, parciais
+    return fig_histogram, fig_comparativo, fig_pie, table, parciais
 
 if __name__ == '__main__':
     app.run_server(debug=False)
