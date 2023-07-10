@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 
 import plotly.express as px
-import plotly.graph_objects as go
+# import plotly.graph_objects as go
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.LUMEN],
             meta_tags=[{'name': 'viewport',
@@ -195,13 +195,14 @@ def update_graphs(ano, periodo, disciplina, parciais):
 
     dt = dtotals.query(query).sort_values(by=['Disciplina', 'Período'])
 
-    fig_comparativo = px.line_3d(x=dt['Disciplina'], y=dt['Nota'], color_discrete_sequence =['LightSeaGreen']).update_layout(
+    fig_comparativo = px.line().update_layout(
             title={"text": titulo_comparativo, "x": 0.5}, yaxis_title="Média do " + periodo, xaxis_title="Disciplina",
             paper_bgcolor = 'rgba(0,0,0,0)')
 
-    fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], name="Média do Augusto no " + periodo, marker=dict(color="LightSeaGreen"))
-    fig_comparativo.add_scatter(x=dfm['Disciplina'], y=dfm['Nota'], name="Média da Turma", marker=dict(color="LightSalmon"))
-
+    fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], text=dt['Nota'], name="Média do Augusto no " + periodo, marker=dict(color="LightSeaGreen"), textfont_color="LightSeaGreen")
+    fig_comparativo.add_scatter(x=dfm['Disciplina'], y=dfm['Nota'], text=dfm['Nota'], name="Média da Turma", marker=dict(color="LightSalmon"), textfont_color="LightSalmon")
+    fig_comparativo.update_traces(textposition='top center', mode="markers+lines+text", showlegend=True)
+    fig_comparativo.update_layout(hovermode="x unified")
 
 
 
