@@ -196,10 +196,10 @@ def update_graphs(ano, periodo, disciplina, parciais):
     dt = dtotals.query(query).sort_values(by=['Disciplina', 'Período'])
 
     fig_comparativo = px.line_3d(x=dt['Disciplina'], y=dt['Nota'], color_discrete_sequence =['LightSeaGreen']).update_layout(
-            title={"text": titulo_comparativo, "x": 0.5}, yaxis_title="Nota", xaxis_title="Disciplina",
+            title={"text": titulo_comparativo, "x": 0.5}, yaxis_title="Média do " + periodo, xaxis_title="Disciplina",
             paper_bgcolor = 'rgba(0,0,0,0)')
 
-    fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], name="Nota no " + periodo, marker=dict(color="LightSeaGreen"))
+    fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], name="Média do Augusto no " + periodo, marker=dict(color="LightSeaGreen"))
     fig_comparativo.add_scatter(x=dfm['Disciplina'], y=dfm['Nota'], name="Média da Turma", marker=dict(color="LightSalmon"))
 
 
