@@ -167,7 +167,8 @@ def update_graphs(ano, periodo, disciplina, parciais):
     titulo_histogram = "Aproveitamento Trimestral - " + ano + " Ano"
 
     if parciais:    
-        fig_histogram = px.bar(dff, x="Período", y="Nota", color="Disciplina", barmode='group', hover_name='Disciplina', hover_data=['Avaliação'], text='Nota', height=500).update_layout(
+        fig_histogram = px.bar(dff, x="Período", y="Nota", color="Disciplina", barmode='group', hover_name='Disciplina', hover_data=['Avaliação'],
+            text='Nota', height=500, color_discrete_sequence=px.colors.qualitative.T10).update_layout(
             title={"text": titulo_histogram, "x": 0.5}, yaxis_title="Média Final do Trimestre",
             paper_bgcolor = 'rgba(0,0,0,0)',
             # font = {"color": '#839496'},
@@ -175,7 +176,8 @@ def update_graphs(ano, periodo, disciplina, parciais):
             # plot_bgcolor = 'rgba(0,0,0,0)',
         )
     else:
-        fig_histogram = px.bar(dff, x="Período", y="Nota", color="Disciplina", barmode='group', hover_name='Disciplina', text='Nota', height=500).update_layout(
+        fig_histogram = px.bar(dff, x="Período", y="Nota", color="Disciplina", barmode='group', hover_name='Disciplina',
+            text='Nota', height=500, color_discrete_sequence=px.colors.qualitative.T10).update_layout(
             title={"text": titulo_histogram, "x": 0.5}, yaxis_title="Média Final do Trimestre",
             paper_bgcolor = 'rgba(0,0,0,0)',
             # font = {"color": '#839496'},
@@ -199,8 +201,8 @@ def update_graphs(ano, periodo, disciplina, parciais):
             title={"text": titulo_comparativo, "x": 0.5}, yaxis_title="Média do " + periodo, xaxis_title="Disciplina",
             paper_bgcolor = 'rgba(0,0,0,0)')
 
-    fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], text=dt['Nota'], name="Média do Augusto no " + periodo, marker=dict(color="LightSeaGreen"), textfont_color="LightSeaGreen")
-    fig_comparativo.add_scatter(x=dfm['Disciplina'], y=dfm['Nota'], text=dfm['Nota'], name="Média da Turma", marker=dict(color="LightSalmon"), textfont_color="LightSalmon")
+    fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], text=dt['Nota'], name="Média do Augusto no " + periodo, marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
+    fig_comparativo.add_scatter(x=dfm['Disciplina'], y=dfm['Nota'], text=dfm['Nota'], name="Média da Turma", marker_color=px.colors.qualitative.Light24[23], textfont_color=px.colors.qualitative.Light24[22])
     fig_comparativo.update_traces(textposition='top center', mode="markers+lines+text", showlegend=True)
     fig_comparativo.update_layout(hovermode="x unified")
 
@@ -213,7 +215,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
     soma = float("{:.1f}".format(dff['Nota'].sum()))
 
     titulo_pie = disciplina + " - " + ano + " Ano - " + periodo + " - Média Final: " + str(soma)
-    fig_pie = px.pie(dff, values="Nota", names="Avaliação", hole=.2).update_layout(
+    fig_pie = px.pie(dff, values="Nota", names="Avaliação", hole=.2, color_discrete_sequence=px.colors.qualitative.Pastel).update_layout(
         title={"text": titulo_pie, "x": 0.5},
         paper_bgcolor = 'rgba(0,0,0,0)',
         # font = {"color": '#839496'},
