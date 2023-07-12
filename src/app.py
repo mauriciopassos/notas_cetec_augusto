@@ -128,7 +128,6 @@ app.layout = dbc.Container(
         html.Div(id="id_tabela_pie"),
 
         dcc.Graph(id="graph_comparativo"),
-        html.Div(id="nothing")
     ],style={"text-align": "center"}
 )
 
@@ -167,7 +166,6 @@ def showTables(check, checkpie):
         Output("graph_comparativo", "figure"),
         Output("graph_pie", "figure"),
         Output("id_tabela_pie", "children"),
-        Output("nothing", "disable_n_clicks")
     ],
 
     [
@@ -243,7 +241,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
     soma = float("{:.1f}".format(dff['Nota'].sum()))
 
     titulo_pie = disciplina + " - " + ano + " Ano - " + periodo + " - Média Final: " + str(soma)
-    fig_pie = px.pie(dff, values="Nota", names="Avaliação", hole=.2, color_discrete_sequence=px.colors.qualitative.Pastel2).update_layout(
+    fig_pie = px.pie(dff, values="Nota", names="Avaliação", hole=.2, color_discrete_sequence=px.colors.qualitative.Pastel1).update_layout(
         title={"text": titulo_pie, "x": 0.5},
         paper_bgcolor = 'rgba(0,0,0,0)',
         # font = {"color": '#839496'},
@@ -254,7 +252,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
 
     table = dbc.Table.from_dataframe(dff.dropna(subset = ['Nota']), responsive=True, striped=True, bordered=True, hover=True)
 
-    return fig_histogram, fig_comparativo, fig_pie, table, parciais
+    return fig_histogram, fig_comparativo, fig_pie, table
 
 if __name__ == '__main__':
     app.run_server(debug=False)
