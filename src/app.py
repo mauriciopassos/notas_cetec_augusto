@@ -113,32 +113,60 @@ app.layout = dbc.Container(
             ], style=dict(display='flex')
         ),
 
-        dcc.Graph(id="graph_comparativo"),        
-
         dcc.Graph(id="graph_pie"),
-        html.Div(id="id_tabela", style={"text-align": "center", "font-size": "0.875em"}),
+
+        html.Div(
+            children=[
+                dbc.Switch(
+                    label ="Mostrar tabela das notas parciais",
+                    value=False,
+                    id="id_check_table_pie",
+                ),
+            ],style={"text-align": "left", "font-size": "0.875em"}
+        ),
+
+        html.Div(id="id_tabela_pie"),
+
+        dcc.Graph(id="graph_comparativo"),
         html.Div(id="nothing")
     ],style={"text-align": "center"}
 )
 
 @app.callback(
-    Output("aprov_trimestral", "style"),
-    Input("id_check_table", "value"),
+    [
+        Output("aprov_trimestral", "style"),
+        Output("id_tabela_pie", "style"),
+    ],
+    
+    [
+        Input("id_check_table", "value"),
+        Input("id_check_table_pie", "value"),
+    ]
 )
 
-def showTotalsTable(check):
+def showTables(check, checkpie):
 
-    if check:
-        return {"text-align": "center", "font-size": "0.875em", "display": "block",}
+    tr = {"text-align": "center", "font-size": "0.875em", "display": "block",}
+    fl = {"text-align": "center", "font-size": "0.875em", "display": "none",}
+
+    if check & checkpie:
+        return tr, tr
     else:
-        return {"text-align": "center", "font-size": "0.875em", "display": "none",}
+        if check & (not checkpie):
+            return tr, fl
+        else:
+            if (not check) & checkpie:
+                return fl, tr
+            else:
+                return fl, fl
+
 
 @app.callback(
     [
         Output("graph_histogram", "figure"),
         Output("graph_comparativo", "figure"),
         Output("graph_pie", "figure"),
-        Output("id_tabela", "children"),
+        Output("id_tabela_pie", "children"),
         Output("nothing", "disable_n_clicks")
     ],
 
@@ -168,7 +196,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
 
     if parciais:    
         fig_histogram = px.bar(dff, x="Período", y="Nota", color="Disciplina", barmode='group', hover_name='Disciplina', hover_data=['Avaliação'],
-            text='Nota', height=500, color_discrete_sequence=px.colors.qualitative.T10).update_layout(
+            text='Nota', height=500, color_discrete_sequence=px.colors.qualitative.Pastel).update_layout(
             title={"text": titulo_histogram, "x": 0.5}, yaxis_title="Média Final do Trimestre",
             paper_bgcolor = 'rgba(0,0,0,0)',
             # font = {"color": '#839496'},
@@ -177,7 +205,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
         )
     else:
         fig_histogram = px.bar(dff, x="Período", y="Nota", color="Disciplina", barmode='group', hover_name='Disciplina',
-            text='Nota', height=500, color_discrete_sequence=px.colors.qualitative.T10).update_layout(
+            text='Nota', height=500, color_discrete_sequence=px.colors.qualitative.Pastel).update_layout(
             title={"text": titulo_histogram, "x": 0.5}, yaxis_title="Média Final do Trimestre",
             paper_bgcolor = 'rgba(0,0,0,0)',
             # font = {"color": '#839496'},
@@ -215,7 +243,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
     soma = float("{:.1f}".format(dff['Nota'].sum()))
 
     titulo_pie = disciplina + " - " + ano + " Ano - " + periodo + " - Média Final: " + str(soma)
-    fig_pie = px.pie(dff, values="Nota", names="Avaliação", hole=.2, color_discrete_sequence=px.colors.qualitative.Pastel).update_layout(
+    fig_pie = px.pie(dff, values="Nota", names="Avaliação", hole=.2, color_discrete_sequence=px.colors.qualitative.Pastel2).update_layout(
         title={"text": titulo_pie, "x": 0.5},
         paper_bgcolor = 'rgba(0,0,0,0)',
         # font = {"color": '#839496'},
