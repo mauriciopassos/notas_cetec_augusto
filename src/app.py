@@ -54,7 +54,7 @@ for a in lista_anos:
 
             addRowinTotals(a, d, p, float("{:.1f}".format(dff['Nota'].sum())))
 
-        addRowinTotals(a, d, "Avaliação Final", float("{:.1f}".format(soma / len(lista_periodos))))
+        addRowinTotals(a, d, "Média Final", float("{:.1f}".format(soma / len(lista_periodos))))
 
 dfpivot_totals = dtotals.pivot(index="Disciplina", columns="Período", values="Nota")
 
@@ -255,4 +255,4 @@ def update_graphs(ano, periodo, disciplina, parciais):
     return fig_histogram, fig_comparativo, fig_pie, table
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)
