@@ -227,7 +227,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
             title={"text": titulo_comparativo, "x": 0.5}, yaxis_title="Média do " + periodo, xaxis_title="Disciplina",
             paper_bgcolor = 'rgba(0,0,0,0)')
 
-    fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], text=dt['Nota'], name="Média do Augusto no " + periodo, marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
+    fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], text=dt['Nota'], name="Média do Augusto", marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
     fig_comparativo.add_scatter(x=dfm['Disciplina'], y=dfm['Nota'], text=dfm['Nota'], name="Média da Turma", marker_color=px.colors.qualitative.Light24[23], textfont_color=px.colors.qualitative.Light24[22])
     fig_comparativo.update_traces(textposition='top center', mode="markers+lines+text", showlegend=True)
     fig_comparativo.update_layout(hovermode="x unified")
