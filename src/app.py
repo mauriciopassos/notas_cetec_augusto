@@ -229,10 +229,8 @@ def update_graphs(ano, periodo, disciplina, parciais):
 
     fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], text=dt['Nota'], name="Média do Augusto", marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
     fig_comparativo.add_scatter(x=dfm['Disciplina'], y=dfm['Nota'], text=dfm['Nota'], name="Média da Turma", marker_color=px.colors.qualitative.Light24[23], textfont_color=px.colors.qualitative.Light24[22])
-    fig_comparativo.update_traces(textposition='top center', mode="markers+lines+text", showlegend=True)
+    fig_comparativo.update_traces(textposition='top center', mode="markers+lines+text", showlegend=True, line_shape='spline')
     fig_comparativo.update_layout(hovermode="x unified")
-
-
 
     query = "Ano == \'" + ano + "\' & Disciplina == \'"+ disciplina + "\' & Período == \'" + periodo + "\'"
     dff = df.query(query).sort_values(by=['Avaliação'])
