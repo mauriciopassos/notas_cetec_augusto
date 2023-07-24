@@ -258,4 +258,4 @@ def update_graphs(ano, periodo, disciplina, parciais):
     return fig_histogram, fig_comparativo, fig_pie, table
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
