@@ -6,11 +6,15 @@ import pandas as pd
 import plotly.express as px
 # import plotly.graph_objects as go
 
+# stylesheet with the .dbc class from dash-bootstrap-templates library
+dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.css"
+
+# app = Dash(__name__, external_stylesheets=[dbc.themes.LUMEN, dbc_css],
 app = Dash(__name__, external_stylesheets=[dbc.themes.LUMEN],
-            meta_tags=[{'name': 'viewport',
+            meta_tags=[ {'name': 'viewport',
                         'content': 'width=device-width, initial-scale=1.0'},
                         {'http-equiv': 'content-language',
-                            'content': 'pt-br'},
+                        'content': 'pt-br'},
                     ]
         )
 server = app.server
@@ -19,6 +23,9 @@ app.title = 'Notas CETEC Augusto Marques dos Passos'
 
 df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
 # df = pd.read_csv('src/df_notas_cetec_augusto.csv')
+
+# colors_list = ['#2a3f5f', '#E5ECF6', '#ff6961', '#ffb480', '#f8f38d', '#42d6a4', '#08cad1', '#59adf6', '#9d94ff', '#c780e8']
+# colors_list = ['#ff0000', '#ff8000', '#ffff00', '#80ff00', '#00ff00', '#00ff80', '#00ffff', '#0080ff', '#0000ff', '#8000ff', '#ff00ff', '#ff0080']
 
 lista_anos = df['Ano'].unique().tolist()
 lista_disciplinas = sorted(df['Disciplina'].unique().tolist())
@@ -97,18 +104,18 @@ app.layout = dbc.Container(
         html.Div(
             className="row", children=[
                 html.Div(className='four columns', children=[
-                    # dcc.Dropdown(options=lista_anos, value="6º", id='id_dd_ano'),
-                    dbc.Select(options=lista_anos, value="6º", id='id_dd_ano'),
+                    dcc.Dropdown(options=lista_anos, value="6º", id='id_dd_ano', clearable=False, className="dbc"),
+                    # dbc.Select(options=lista_anos, value="6º", id='id_dd_ano'),
                 ],style=dict(width='34%')),
                 
                 html.Div(className='four columns', children=[
-                    # dcc.Dropdown(options=lista_periodos, value="1º Trimestre", id='id_dd_periodo'),
-                    dbc.Select(options=lista_periodos, value="1º Trimestre", id='id_dd_periodo'),
+                    dcc.Dropdown(options=lista_periodos, value="1º Trimestre", id='id_dd_periodo', clearable=False, className="dbc"),
+                    # dbc.Select(options=lista_periodos, value="1º Trimestre", id='id_dd_periodo'),
                 ],style=dict(width='33%')),
                 
                 html.Div(className='four columns', children=[
-                    # dcc.Dropdown(options=lista_disciplinas, value="Língua Portuguesa", id='id_dd_disciplina'),
-                    dbc.Select(options=lista_disciplinas, value="Matemática", id='id_dd_disciplina'),
+                    dcc.Dropdown(options=lista_disciplinas, value="Língua Portuguesa", id='id_dd_disciplina', clearable=False, className="dbc"),
+                    # dbc.Select(options=lista_disciplinas, value="Matemática", id='id_dd_disciplina'),
                 ],style=dict(width='33%')),
             ], style=dict(display='flex')
         ),
@@ -211,8 +218,6 @@ def update_graphs(ano, periodo, disciplina, parciais):
             # plot_bgcolor = 'rgba(0,0,0,0)',
         )
 
-
-
     titulo_comparativo = "Comparativo com a Média da Turma no " + periodo
 
     query = "Ano == \'" + ano + "\' & Período == \'" + periodo + "\'"
@@ -253,4 +258,4 @@ def update_graphs(ano, periodo, disciplina, parciais):
     return fig_histogram, fig_comparativo, fig_pie, table
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)
