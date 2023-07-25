@@ -203,7 +203,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
     if parciais:    
         fig_histogram = px.bar(dff, x="Período", y="Nota", color="Disciplina", barmode='group', hover_name='Disciplina', hover_data=['Avaliação'],
             text='Nota', height=500, color_discrete_sequence=px.colors.qualitative.Pastel).update_layout(
-            title={"text": titulo_histogram, "x": 0.5}, yaxis_title="Média Final do Trimestre",
+            title={"text": titulo_histogram, "x": 0.5}, yaxis_title = "Média no Período",
             paper_bgcolor = 'rgba(0,0,0, 0)',
             # font = {"color": '#839496'},
             # font = {"color": '#EBEBEB'},
@@ -213,7 +213,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
     else:
         fig_histogram = px.bar(dff, x="Período", y="Nota", color="Disciplina", barmode='group', hover_name='Disciplina',
             text='Nota', height=500, color_discrete_sequence=px.colors.qualitative.Pastel).update_layout(
-            title={"text": titulo_histogram, "x": 0.5}, yaxis_title="Média Final do Trimestre",
+            title={"text": titulo_histogram, "x": 0.5}, yaxis_title = "Média no Período",
             paper_bgcolor = 'rgba(0,0,0,0)',
             # font = {"color": '#839496'},
             # font = {"color": '#EBEBEB'},
