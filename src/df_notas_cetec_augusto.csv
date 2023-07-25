@@ -1,10 +1,10 @@
 Ano,Disciplina,Período,Avaliação,Data da Avaliação,Descrição da Avaliação,Nota
-6º,Língua Portuguesa,1º Trimestre,Trabalho 1,23/05/2023,"Trabalho de Língua Portuguesa (T1): 2,0 pontos ...",1.9
+6º,Língua Portuguesa,1º Trimestre,Trabalho 1,23/05/2023,"Trabalho de Língua Portuguesa (T1): 2,0 pontos - Substantivos_classes e flexões",1.9
 6º,Língua Portuguesa,1º Trimestre,Trabalho 2,,,
 6º,Língua Portuguesa,1º Trimestre,Trabalho 3,,,
 6º,Língua Portuguesa,1º Trimestre,Trabalho 4,,,
-6º,Língua Portuguesa,1º Trimestre,Prova 1,18/04/2023,"Leitura e interpretação, estrutura da narrativ...",2.9
-6º,Língua Portuguesa,1º Trimestre,Prova 2,09/05/2023,"Prova de Língua Portuguesa (P2): 3,0 pontos - S...",2.8
+6º,Língua Portuguesa,1º Trimestre,Prova 1,18/04/2023,"Leitura e interpretação, estrutura da narrativa, tipos de linguagem, classes gramaticais, uso dos porquês.",2.9
+6º,Língua Portuguesa,1º Trimestre,Prova 2,09/05/2023,"Prova de Língua Portuguesa (P2): 3,0 pontos - Sinais de pontuação",2.8
 6º,Língua Portuguesa,1º Trimestre,Mostra Científica,,,1
 6º,Língua Portuguesa,1º Trimestre,Projeto Musical,,,1
 6º,Língua Portuguesa,1º Trimestre,Prova Recuperação Pós Trimestre,,,
@@ -14,7 +14,7 @@ Ano,Disciplina,Período,Avaliação,Data da Avaliação,Descrição da Avaliaç�
 6º,Matemática,1º Trimestre,Trabalho 3,,,1
 6º,Matemática,1º Trimestre,Trabalho 4,,,1
 6º,Matemática,1º Trimestre,Prova 1,10/04/2023,"Expressões numéricas, Potência e Raiz quadrada.",2
-6º,Matemática,1º Trimestre,Prova 2,22/05/2023,Compreender o conceito de múltiplos de um númer...,3
+6º,Matemática,1º Trimestre,Prova 2,22/05/2023,Compreender o conceito de múltiplos de um número natural e estabelecer relações com o cotidiano; Compreender o conceito de divisores de um número natural e estabelecer relações; Conceituar e compreender números primos e compostos; Determinar mmc e mdc de dois ou mais números e utilizá-los na resolução de problemas; Decompor um número composto em fatores primos.,3
 6º,Matemática,1º Trimestre,Mostra Científica,,,1
 6º,Matemática,1º Trimestre,Projeto Musical,,,1
 6º,Matemática,1º Trimestre,Prova Recuperação Pós Trimestre,,,
@@ -29,12 +29,12 @@ Ano,Disciplina,Período,Avaliação,Data da Avaliação,Descrição da Avaliaç�
 6º,Ciências da Natureza,1º Trimestre,Projeto Musical,,,1
 6º,Ciências da Natureza,1º Trimestre,Prova Recuperação Pós Trimestre,,,
 6º,Ciências da Natureza,1º Trimestre,Média da Turma,,,8.93
-6º,História,1º Trimestre,Trabalho 1,13/04/2023,"O surgimento da Humanidade, Pré-História (paleo...",2
+6º,História,1º Trimestre,Trabalho 1,13/04/2023,"O surgimento da Humanidade, Pré-História (paleolítico e neolítico) e os deslocamentos da humanidade ao redor do globo",2
 6º,História,1º Trimestre,Trabalho 2,,,
 6º,História,1º Trimestre,Trabalho 3,,,
 6º,História,1º Trimestre,Trabalho 4,,,
-6º,História,1º Trimestre,Prova 1,27/04/2023,"O surgimento da Humanidade, Pré-História (pale...",2.8
-6º,História,1º Trimestre,Prova 2,18/05/2023,As primeiras civilizações da humanidade e a for...,2.8
+6º,História,1º Trimestre,Prova 1,27/04/2023,"O surgimento da Humanidade, Pré-História (paleolítico e neolítico) e os deslocamentos da humanidade ao redor do globo - Parte I - 27/04/23 - Parte II - 28/04/23",2.8
+6º,História,1º Trimestre,Prova 2,18/05/2023,"As primeiras civilizações da humanidade e a formação de sociedades complexas, o crescente fértil e a mesopotâmia - Parte I - 18/05/23 - Parte II - 19/05/23",2.8
 6º,História,1º Trimestre,Mostra Científica,,,1
 6º,História,1º Trimestre,Projeto Musical,,,1
 6º,História,1º Trimestre,Prova Recuperação Pós Trimestre,,,
@@ -43,7 +43,7 @@ Ano,Disciplina,Período,Avaliação,Data da Avaliação,Descrição da Avaliaç�
 6º,Geografia,1º Trimestre,Trabalho 2,,,1.5
 6º,Geografia,1º Trimestre,Trabalho 3,,,1.5
 6º,Geografia,1º Trimestre,Trabalho 4,,,1.5
-6º,Geografia,1º Trimestre,Prova 1,12/04/2023,Unidade 1: Tema 1: Paisagens | Tema 2: A ident...,2
+6º,Geografia,1º Trimestre,Prova 1,12/04/2023,Unidade 1: Tema 1: Paisagens | Tema 2: A identidade dos lugares,2
 6º,Geografia,1º Trimestre,Prova 2,,,
 6º,Geografia,1º Trimestre,Mostra Científica,,,1
 6º,Geografia,1º Trimestre,Projeto Musical,,,1
@@ -59,8 +59,8 @@ Ano,Disciplina,Período,Avaliação,Data da Avaliação,Descrição da Avaliaç�
 6º,Educação Física,1º Trimestre,Projeto Musical,,,1
 6º,Educação Física,1º Trimestre,Prova Recuperação Pós Trimestre,,,
 6º,Educação Física,1º Trimestre,Média da Turma,,,9.82
-6º,Arte - Visuais,1º Trimestre,Trabalho 1,08/05/2023,"Portfólio Avaliativo = Arte Rupestre, Estilo e ...",4
-6º,Arte - Visuais,1º Trimestre,Trabalho 2,15/05/2023,Galeria de arte = tema é escolhido pelos aluno...,3.6
+6º,Arte - Visuais,1º Trimestre,Trabalho 1,08/05/2023,"Portfólio Avaliativo = Arte Rupestre, Estilo e Desenvolvimento do Desenho, Cor e Pigmentos",4
+6º,Arte - Visuais,1º Trimestre,Trabalho 2,15/05/2023,Galeria de arte = tema é escolhido pelos alunos 15 dias antes das apresentações,3.6
 6º,Arte - Visuais,1º Trimestre,Trabalho 3,,,
 6º,Arte - Visuais,1º Trimestre,Trabalho 4,,,
 6º,Arte - Visuais,1º Trimestre,Prova 1,,,
@@ -73,17 +73,17 @@ Ano,Disciplina,Período,Avaliação,Data da Avaliação,Descrição da Avaliaç�
 6º,Língua Inglesa,1º Trimestre,Trabalho 2,,,0.9
 6º,Língua Inglesa,1º Trimestre,Trabalho 3,,,0.5
 6º,Língua Inglesa,1º Trimestre,Trabalho 4,,,1.5
-6º,Língua Inglesa,1º Trimestre,Prova 1,11/04/2023,"greetings, months of the year / days of the we...",1
-6º,Língua Inglesa,1º Trimestre,Prova 2,15/05/2023,"Prova de Língua Inglesa (P2): 2,0 pontos - Gru...",2.6
+6º,Língua Inglesa,1º Trimestre,Prova 1,11/04/2023,"greetings, months of the year / days of the week, personal pronouns / possessive adjectives, countries and nationalities, numbers de 0-100, verbo To Be",1
+6º,Língua Inglesa,1º Trimestre,Prova 2,15/05/2023,"Prova de Língua Inglesa (P2): 2,0 pontos - Grupo A = Listening, reading, sentimentos e atividades rotineiras /// Grupo B = simple present (affirmative, negative and interrogative), time (horas), free time activities e routine verbs",2.6
 6º,Língua Inglesa,1º Trimestre,Mostra Científica,,,1
 6º,Língua Inglesa,1º Trimestre,Projeto Musical,,,1
 6º,Língua Inglesa,1º Trimestre,Prova Recuperação Pós Trimestre,,,
 6º,Língua Inglesa,1º Trimestre,Média da Turma,,,8.53
 6º,Filosofia,1º Trimestre,Trabalho 1,06/03/2023,Trabalho em grupos sobre questões de ética,1
 6º,Filosofia,1º Trimestre,Trabalho 2,17/04/2023,Trabalho individual sobre mitologia.,1
-6º,Filosofia,1º Trimestre,Trabalho 3,08/05/2023,Trabalho de filosofia (T3): Avaliação da produç...,1
+6º,Filosofia,1º Trimestre,Trabalho 3,08/05/2023,Trabalho de filosofia (T3): Avaliação da produção dos alunos,1
 6º,Filosofia,1º Trimestre,Trabalho 4,,,1
-6º,Filosofia,1º Trimestre,Prova 1,15/05/2023,"Conceito de filosofia, pensamento mitológico, ...",3.7
+6º,Filosofia,1º Trimestre,Prova 1,15/05/2023,"Conceito de filosofia, pensamento mitológico, filosofia pré-socrática",3.7
 6º,Filosofia,1º Trimestre,Prova 2,,,
 6º,Filosofia,1º Trimestre,Mostra Científica,,,1
 6º,Filosofia,1º Trimestre,Projeto Musical,,,1
@@ -94,7 +94,7 @@ Ano,Disciplina,Período,Avaliação,Data da Avaliação,Descrição da Avaliaç�
 6º,Arte - Música,1º Trimestre,Trabalho 3,,,
 6º,Arte - Música,1º Trimestre,Trabalho 4,,,
 6º,Arte - Música,1º Trimestre,Prova 1,25/04/2023,Famílias dos Instrumentos. Timbres.,2.7
-6º,Arte - Música,1º Trimestre,Prova 2,16/05/2023,Prova prática de performance musical com xilof...,3
+6º,Arte - Música,1º Trimestre,Prova 2,16/05/2023,Prova prática de performance musical com xilofones e composição musical.,3
 6º,Arte - Música,1º Trimestre,Mostra Científica,,,1
 6º,Arte - Música,1º Trimestre,Projeto Musical,,,1
 6º,Arte - Música,1º Trimestre,Prova Recuperação Pós Trimestre,,,
@@ -109,7 +109,7 @@ Ano,Disciplina,Período,Avaliação,Data da Avaliação,Descrição da Avaliaç�
 6º,Arte - Teatro,1º Trimestre,Projeto Musical,,,1
 6º,Arte - Teatro,1º Trimestre,Prova Recuperação Pós Trimestre,,,
 6º,Arte - Teatro,1º Trimestre,Média da Turma,,,9.8
-6º,Arte - Dança,1º Trimestre,Trabalho 1,05/05/2023,História da dança - pré-história e dança na an...,3.8
+6º,Arte - Dança,1º Trimestre,Trabalho 1,05/05/2023,História da dança - pré-história e dança na antiguidade,3.8
 6º,Arte - Dança,1º Trimestre,Trabalho 2,19/05/2023,Processos de criação - Brincadeiras e jogos,4
 6º,Arte - Dança,1º Trimestre,Trabalho 3,,,
 6º,Arte - Dança,1º Trimestre,Trabalho 4,,,
@@ -129,12 +129,12 @@ Ano,Disciplina,Período,Avaliação,Data da Avaliação,Descrição da Avaliaç�
 6º,Leitura e Produção Textual,1º Trimestre,Projeto Musical,,,1
 6º,Leitura e Produção Textual,1º Trimestre,Prova Recuperação Pós Trimestre,,,
 6º,Leitura e Produção Textual,1º Trimestre,Média da Turma,,,8.46
-6º,Língua Portuguesa,2º Trimestre,Trabalho 1,27/06/2023,"Trabalho de Língua Portuguesa (T1): 1,0 ponto -...",0.8
-6º,Língua Portuguesa,2º Trimestre,Trabalho 2,04/07/2023,"Trabalho de Língua Portuguesa (T2): 1,0 ponto -...",1
+6º,Língua Portuguesa,2º Trimestre,Trabalho 1,27/06/2023,"Trabalho de Língua Portuguesa (T1): 1,0 ponto - Trabalho a ser realizado em aula sobre substantivos e adjetivos.",0.8
+6º,Língua Portuguesa,2º Trimestre,Trabalho 2,04/07/2023,"Trabalho de Língua Portuguesa (T2): 1,0 ponto - Produção de mapa mental sobre o conteúdo estudado (pronomes)",1
 6º,Língua Portuguesa,2º Trimestre,Trabalho 3,,,
 6º,Língua Portuguesa,2º Trimestre,Trabalho 4,,,
-6º,Língua Portuguesa,2º Trimestre,Prova 1,11/07/2023,"Prova de Língua Portuguesa (P1): 2,0 pontos - P...",1.9
-6º,Língua Portuguesa,2º Trimestre,Prova 2,,,
+6º,Língua Portuguesa,2º Trimestre,Prova 1,11/07/2023,"Prova de Língua Portuguesa (P1): 2,0 pontos - Pronomes",1.9
+6º,Língua Portuguesa,2º Trimestre,Prova 2,15/08/2023,"Prova de Língua Portuguesa (P2): 3,0 pontos - Verbos",
 6º,Língua Portuguesa,2º Trimestre,Mostra Científica,,,
 6º,Língua Portuguesa,2º Trimestre,Projeto Musical,,,
 6º,Língua Portuguesa,2º Trimestre,Prova Recuperação Pós Trimestre,,,
@@ -143,18 +143,18 @@ Ano,Disciplina,Período,Avaliação,Data da Avaliação,Descrição da Avaliaç�
 6º,Matemática,2º Trimestre,Trabalho 2,,,
 6º,Matemática,2º Trimestre,Trabalho 3,,,
 6º,Matemática,2º Trimestre,Trabalho 4,,,
-6º,Matemática,2º Trimestre,Prova 1,10/07/2023,"Prova de Matemática (P1): 3,0 pontos - Compreen...",3
-6º,Matemática,2º Trimestre,Prova 2,,,
+6º,Matemática,2º Trimestre,Prova 1,10/07/2023,"Prova de Matemática (P1): 3,0 pontos - Compreender, comparar e ordenar frações associadas às ideias de partes de inteiros e resultado de divisão, identificando frações equivalentes. Resolver problemas que envolvam adição, subtração, multiplicação, divisão, potenciação e radiciação, com números racionais positivos na representação fracionária.",3
+6º,Matemática,2º Trimestre,Prova 2,21/08/2023,"Prova de Matemática (P2): 2,0 pontos - Reconhecer que os números racionais positivos podem ser expressos nas formas fracionária e decimal, estabelecer relações entre essas representações, passando de uma representação para outra, e relacioná-los a pontos na reta numérica.",
 6º,Matemática,2º Trimestre,Mostra Científica,,,
 6º,Matemática,2º Trimestre,Projeto Musical,,,
 6º,Matemática,2º Trimestre,Prova Recuperação Pós Trimestre,,,
 6º,Matemática,2º Trimestre,Média da Turma,,,0
-6º,Ciências da Natureza,2º Trimestre,Trabalho 1,21/06/2023,"Trabalho de Ciências (T1): 1,0 ponto - Contamin...",0.9
-6º,Ciências da Natureza,2º Trimestre,Trabalho 2,12/07/2023,"Trabalho de Ciências (T2): 1,0 ponto - Rochas e...",
+6º,Ciências da Natureza,2º Trimestre,Trabalho 1,21/06/2023,"Trabalho de Ciências (T1): 1,0 ponto - Contaminação e tratamento de água",0.9
+6º,Ciências da Natureza,2º Trimestre,Trabalho 2,12/07/2023,"Trabalho de Ciências (T2): 1,0 ponto - Rochas e solo",
 6º,Ciências da Natureza,2º Trimestre,Trabalho 3,,,
 6º,Ciências da Natureza,2º Trimestre,Trabalho 4,,,
-6º,Ciências da Natureza,2º Trimestre,Prova 1,05/07/2023,"Prova de Ciências da Natureza (P1): 2,5 pontos ...",2.4
-6º,Ciências da Natureza,2º Trimestre,Prova 2,16/08/2023,"Prova de Ciências da Natureza (P2): 2,5 pontos ...",
+6º,Ciências da Natureza,2º Trimestre,Prova 1,05/07/2023,"Prova de Ciências da Natureza (P1): 2,5 pontos - água e solo",2.4
+6º,Ciências da Natureza,2º Trimestre,Prova 2,16/08/2023,"Prova de Ciências da Natureza (P2): 2,5 pontos - astronomia",
 6º,Ciências da Natureza,2º Trimestre,Mostra Científica,,,
 6º,Ciências da Natureza,2º Trimestre,Projeto Musical,,,
 6º,Ciências da Natureza,2º Trimestre,Prova Recuperação Pós Trimestre,,,
@@ -169,12 +169,12 @@ Ano,Disciplina,Período,Avaliação,Data da Avaliação,Descrição da Avaliaç�
 6º,História,2º Trimestre,Projeto Musical,,,
 6º,História,2º Trimestre,Prova Recuperação Pós Trimestre,,,
 6º,História,2º Trimestre,Média da Turma,,,0
-6º,Geografia,2º Trimestre,Trabalho 1,21/06/2023,"Trabalho de Geografia (T1): 1,0 ponto - Coorden...",1
-6º,Geografia,2º Trimestre,Trabalho 2,05/07/2023,"Trabalho de Geografia (T2): 1,0 ponto - Globo T...",
+6º,Geografia,2º Trimestre,Trabalho 1,21/06/2023,"Trabalho de Geografia (T1): 1,0 ponto - Coordenadas geográficas",1
+6º,Geografia,2º Trimestre,Trabalho 2,05/07/2023,"Trabalho de Geografia (T2): 1,0 ponto - Globo Terrestre",
 6º,Geografia,2º Trimestre,Trabalho 3,23/08/2023,"Trabalho de Geografia (T3): 1,0 ponto - Mapa",
 6º,Geografia,2º Trimestre,Trabalho 4,,,
 6º,Geografia,2º Trimestre,Prova 1,29/06/2023,"Prova de Geografia (P1): 2,0 pontos - Cartografia",2
-6º,Geografia,2º Trimestre,Prova 2,17/08/2023,"Prova de Geografia (P2): 2,0 pontos - Formas de...",
+6º,Geografia,2º Trimestre,Prova 2,17/08/2023,"Prova de Geografia (P2): 2,0 pontos - Formas de representar o espaço.",
 6º,Geografia,2º Trimestre,Mostra Científica,,,
 6º,Geografia,2º Trimestre,Projeto Musical,,,
 6º,Geografia,2º Trimestre,Prova Recuperação Pós Trimestre,,,
@@ -201,9 +201,11 @@ Ano,Disciplina,Período,Avaliação,Data da Avaliação,Descrição da Avaliaç�
 6º,Arte - Visuais,2º Trimestre,Média da Turma,,,0
 6º,Língua Inglesa,2º Trimestre,Trabalho 1,,,
 6º,Língua Inglesa,2º Trimestre,Trabalho 2,,,
-6º,Língua Inglesa,2º Trimestre,Trabalho 3,,,
+6º,Língua Inglesa,2º Trimestre,Trabalho 3,18/08/2023,Trabalho de Língua Inglesa (T3): grupo B - atividades de língua inglesa a serem feitas em sala de aula,
 6º,Língua Inglesa,2º Trimestre,Trabalho 4,,,
-6º,Língua Inglesa,2º Trimestre,Prova 1,22/06/2023,Prova de Língua Inglesa (P1): grupo B - Unidade...,1.9
+6º,Língua Inglesa,2º Trimestre,Prova 1,22/06/2023,"Prova de Língua Inglesa (P1): grupo B - Unidade 3 sobre there is/are, parts of the house, furniture, prepositions of place (paginas 36 - 39); Unidade 4 sobre object pronouns (páginas 49, 120, 140, 217 e 217)
+
+Prova de Língua Inglesa (P1) (Grupo A): 2,0 pontos - Wh questions; Verb to be; How to express the hours; Simple Present (Routines and Free time activities); Listening; Reading",1.9
 6º,Língua Inglesa,2º Trimestre,Prova 2,,,
 6º,Língua Inglesa,2º Trimestre,Mostra Científica,,,
 6º,Língua Inglesa,2º Trimestre,Projeto Musical,,,
@@ -249,12 +251,12 @@ Ano,Disciplina,Período,Avaliação,Data da Avaliação,Descrição da Avaliaç�
 6º,Arte - Dança,2º Trimestre,Projeto Musical,,,
 6º,Arte - Dança,2º Trimestre,Prova Recuperação Pós Trimestre,,,
 6º,Arte - Dança,2º Trimestre,Média da Turma,,,0
-6º,Leitura e Produção Textual,2º Trimestre,Trabalho 1,13/06/2023,"Trabalho de Leitura e Produção Textual (T1): 1,...",0.9
-6º,Leitura e Produção Textual,2º Trimestre,Trabalho 2,22/08/2023,"Trabalho de Leitura e Produção textual (T2): 2,...",
+6º,Leitura e Produção Textual,2º Trimestre,Trabalho 1,13/06/2023,"Trabalho de Leitura e Produção Textual (T1): 1,0 ponto - Resenha crítica",0.9
+6º,Leitura e Produção Textual,2º Trimestre,Trabalho 2,22/08/2023,"Trabalho de Leitura e Produção textual (T2): 2,0 pontos - Reescrita da Carta de solicitação",
 6º,Leitura e Produção Textual,2º Trimestre,Trabalho 3,,,
 6º,Leitura e Produção Textual,2º Trimestre,Trabalho 4,,,
-6º,Leitura e Produção Textual,2º Trimestre,Prova 1,04/07/2023,"Prova de Leitura e Produção textual (P1): 2,0 p...",1.9
-6º,Leitura e Produção Textual,2º Trimestre,Prova 2,08/08/2023,"Prova de Leitura e Produção textual (P2): 2,0 p...",
+6º,Leitura e Produção Textual,2º Trimestre,Prova 1,04/07/2023,"Prova de Leitura e Produção textual (P1): 2,0 pontos - Resenha crítica sobre a própria Fanfic do 1º trimestre",1.9
+6º,Leitura e Produção Textual,2º Trimestre,Prova 2,08/08/2023,"Prova de Leitura e Produção textual (P2): 2,0 pontos - Carta de solicitação",
 6º,Leitura e Produção Textual,2º Trimestre,Mostra Científica,,,
 6º,Leitura e Produção Textual,2º Trimestre,Projeto Musical,,,
 6º,Leitura e Produção Textual,2º Trimestre,Prova Recuperação Pós Trimestre,,,
