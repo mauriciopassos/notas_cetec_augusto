@@ -4,13 +4,14 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 
 import plotly.express as px
+from dash_bootstrap_templates import load_figure_template
 # import plotly.graph_objects as go
 
 # stylesheet with the .dbc class from dash-bootstrap-templates library
-dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.css"
+# dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.css"
 
 # app = Dash(__name__, external_stylesheets=[dbc.themes.LUMEN, dbc_css],
-app = Dash(__name__, external_stylesheets=[dbc.themes.LUMEN],
+app = Dash(__name__, external_stylesheets=[dbc.themes.SANDSTONE],
             meta_tags=[ {'name': 'viewport',
                         'content': 'width=device-width, initial-scale=1.0'},
                         {'http-equiv': 'content-language',
@@ -20,6 +21,8 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.LUMEN],
 server = app.server
 
 app.title = 'Notas CETEC Augusto Marques dos Passos'
+
+load_figure_template("sandstone")
 
 df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
 # df = pd.read_csv('src/df_notas_cetec_augusto.csv')
@@ -230,7 +233,8 @@ def update_graphs(ano, periodo, disciplina, parciais):
 
     fig_comparativo = px.line().update_layout(
             title={"text": titulo_comparativo, "x": 0.5}, yaxis_title="Média do " + periodo, xaxis_title="Disciplina",
-            paper_bgcolor = 'rgba(0,0,0,0)')
+            paper_bgcolor = 'rgba(0,0,0,0)'
+            )
 
     fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], text=dt['Nota'], name="Média do Augusto", marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
     fig_comparativo.add_scatter(x=dfm['Disciplina'], y=dfm['Nota'], text=dfm['Nota'], name="Média da Turma", marker_color=px.colors.qualitative.Light24[23], textfont_color=px.colors.qualitative.Light24[22])

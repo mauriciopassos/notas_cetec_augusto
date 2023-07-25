@@ -33,7 +33,8 @@ Defines the .dbc class
 /* dropdown menu hover effect */
 .dbc .VirtualizedSelectFocusedOption {
   /* background-color: rgba(100, 100, 100, 0.2); */
-  background-color: rgba(var(--bs-primary-rgb), 0.4);
+  background-color: rgba(var(--bs-primary-rgb), 0.3);
+  /* background-color: rgba(var(--bs-secondary-rgb), 0.3); */
   color: black;
 }
 
