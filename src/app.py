@@ -258,7 +258,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
     fig_pie.update_traces(textposition="inside", textinfo="percent+label")
 
     # table = dbc.Table.from_dataframe(dff.dropna(subset = ['Nota']), responsive=True, striped=True, bordered=True, hover=True)
-    table = dbc.Table.from_dataframe(dff.dropna(subset = ['Nota']), responsive=True, striped=True, bordered=False, hover=True, dark=False)
+    table = dbc.Table.from_dataframe(dff.dropna(subset = ['Nota']), responsive=True, striped=True, bordered=False, hover=True, dark=False, style={'vertical-align' : 'middle'})
     
     return fig_histogram, fig_comparativo, fig_pie, table
 
