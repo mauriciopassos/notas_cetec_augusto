@@ -49,16 +49,20 @@ def addRowinTotals(ano, disciplina, periodo, nota):
 
 for a in lista_anos:
     for d in lista_disciplinas:
-        soma = 0
+        media_final = 0
         for p in lista_periodos:
             query = "Ano == \'" + a + "\' & Disciplina == \'"+ d + "\' & Período == \'" + p + "\'"
             dff = df.query(query).sort_values(by=['Avaliação'], ascending=False)
             dff = dff[dff['Avaliação'] != 'Média da Turma']
-            soma += dff['Nota'].sum()
+            if p == '3º Trimestre':
+                media_final += dff['Nota'].sum() * 0.4
+            else:
+                media_final += dff['Nota'].sum() * 0.3
 
             addRowinTotals(a, d, p, float("{:.1f}".format(dff['Nota'].sum())))
 
-        addRowinTotals(a, d, "Média Final", float("{:.1f}".format(soma / len(lista_periodos))))
+        # addRowinTotals(a, d, "Média Final", float("{:.1f}".format(soma / len(lista_periodos))))
+        addRowinTotals(a, d, "Média Final", float("{:.1f}".format(media_final)))
 
 dfpivot_totals = dtotals.pivot(index="Disciplina", columns="Período", values="Nota")
 
