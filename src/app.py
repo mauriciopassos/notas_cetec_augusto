@@ -11,7 +11,7 @@ from dash_bootstrap_templates import load_figure_template
 # dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.css"
 
 # app = Dash(__name__, external_stylesheets=[dbc.themes.LUMEN, dbc_css],
-app = Dash(__name__, external_stylesheets=[dbc.themes.SANDSTONE],
+app = Dash(__name__, external_stylesheets=[dbc.themes.SKETCHY],
             meta_tags=[ {'name': 'viewport',
                         'content': 'width=device-width, initial-scale=1.0'},
                         {'http-equiv': 'content-language',
@@ -22,7 +22,7 @@ server = app.server
 
 app.title = 'Notas CETEC Augusto Marques dos Passos'
 
-load_figure_template("sandstone")
+load_figure_template("sketchy")
 
 df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
 # df = pd.read_csv('src/df_notas_cetec_augusto.csv')
@@ -99,7 +99,7 @@ app.layout = dbc.Container(
         ),
 
         html.Div(children=[
-                    dbc.Table.from_dataframe(dfpivot_totals, responsive=True, striped=True, bordered=True, hover=True)
+                    dbc.Table.from_dataframe(dfpivot_totals, responsive=True, striped=True, bordered=False, hover=True, dark=False)
                 ],
                 id="aprov_trimestral", 
             ),
@@ -206,11 +206,12 @@ def update_graphs(ano, periodo, disciplina, parciais):
         fig_histogram = px.bar(dff, x="Período", y="Nota", color="Disciplina", barmode='group', hover_name='Disciplina', hover_data=['Avaliação'],
             text='Nota', height=500, color_discrete_sequence=px.colors.qualitative.Pastel).update_layout(
             title={"text": titulo_histogram, "x": 0.5}, yaxis_title="Média Final do Trimestre",
-            paper_bgcolor = 'rgba(0,0,0,0)',
+            paper_bgcolor = 'rgba(0,0,0, 0)',
             # font = {"color": '#839496'},
             # font = {"color": '#EBEBEB'},
-            # plot_bgcolor = 'rgba(0,0,0,0)',
+            # plot_bgcolor = 'rgba(0,0,0, 0)',
         )
+        fig_histogram.update_yaxes(gridcolor="#CCC")
     else:
         fig_histogram = px.bar(dff, x="Período", y="Nota", color="Disciplina", barmode='group', hover_name='Disciplina',
             text='Nota', height=500, color_discrete_sequence=px.colors.qualitative.Pastel).update_layout(
@@ -218,8 +219,9 @@ def update_graphs(ano, periodo, disciplina, parciais):
             paper_bgcolor = 'rgba(0,0,0,0)',
             # font = {"color": '#839496'},
             # font = {"color": '#EBEBEB'},
-            # plot_bgcolor = 'rgba(0,0,0,0)',
+            # plot_bgcolor = 'rgba(0,0,0, 0)',
         )
+        fig_histogram.update_yaxes(gridcolor="#CCC")
 
     titulo_comparativo = "Comparativo com a Média da Turma no " + periodo
 
@@ -248,7 +250,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
     soma = float("{:.1f}".format(dff['Nota'].sum()))
 
     titulo_pie = disciplina + " - " + ano + " Ano - " + periodo + " - Média Final: " + str(soma)
-    fig_pie = px.pie(dff, values="Nota", names="Avaliação", hole=.2, color_discrete_sequence=px.colors.qualitative.Pastel1).update_layout(
+    fig_pie = px.pie(dff, values="Nota", names="Avaliação", hole=.2, color_discrete_sequence=px.colors.qualitative.Pastel2).update_layout(
         title={"text": titulo_pie, "x": 0.5},
         paper_bgcolor = 'rgba(0,0,0,0)',
         # font = {"color": '#839496'},
@@ -257,8 +259,9 @@ def update_graphs(ano, periodo, disciplina, parciais):
     )
     fig_pie.update_traces(textposition="inside", textinfo="percent+label")
 
-    table = dbc.Table.from_dataframe(dff.dropna(subset = ['Nota']), responsive=True, striped=True, bordered=True, hover=True)
-
+    # table = dbc.Table.from_dataframe(dff.dropna(subset = ['Nota']), responsive=True, striped=True, bordered=True, hover=True)
+    table = dbc.Table.from_dataframe(dff.dropna(subset = ['Nota']), responsive=True, striped=True, bordered=False, hover=True, dark=False)
+    
     return fig_histogram, fig_comparativo, fig_pie, table
 
 if __name__ == '__main__':

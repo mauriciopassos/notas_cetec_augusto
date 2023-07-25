@@ -425,6 +425,7 @@ body .dbc .dash-table-container .dash-spreadsheet-container .dash-spreadsheet-in
     float: left;
     -webkit-appearance: none;
     -moz-appearance: none;
+    appearance: none;
     margin-right: 5px;
 }
 
