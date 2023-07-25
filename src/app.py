@@ -247,7 +247,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
 
     soma = float("{:.1f}".format(dff['Nota'].sum()))
 
-    titulo_pie = disciplina + " - " + ano + " Ano - " + periodo + " - Média Final: " + str(soma)
+    titulo_pie = disciplina + " - " + ano + " Ano - Média do " + periodo + ": " + str(soma)
     fig_pie = px.pie(dff, values="Nota", names="Avaliação", hole=.2, color_discrete_sequence=px.colors.qualitative.Pastel2).update_layout(
         title={"text": titulo_pie, "x": 0.5},
         paper_bgcolor = 'rgba(0,0,0,0)',
