@@ -5,12 +5,10 @@ import pandas as pd
 
 import plotly.express as px
 from dash_bootstrap_templates import load_figure_template
-# import plotly.graph_objects as go
 
 # stylesheet with the .dbc class from dash-bootstrap-templates library
 # dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.css"
 
-# app = Dash(__name__, external_stylesheets=[dbc.themes.LUMEN, dbc_css],
 app = Dash(__name__, external_stylesheets=[dbc.themes.SKETCHY],
             meta_tags=[ {'name': 'viewport',
                         'content': 'width=device-width, initial-scale=1.0'},
@@ -22,13 +20,8 @@ server = app.server
 
 app.title = 'Notas CETEC Augusto Marques dos Passos'
 
-load_figure_template("sketchy")
-
 df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
 # df = pd.read_csv('src/df_notas_cetec_augusto.csv')
-
-# colors_list = ['#2a3f5f', '#E5ECF6', '#ff6961', '#ffb480', '#f8f38d', '#42d6a4', '#08cad1', '#59adf6', '#9d94ff', '#c780e8']
-# colors_list = ['#ff0000', '#ff8000', '#ffff00', '#80ff00', '#00ff00', '#00ff80', '#00ffff', '#0080ff', '#0000ff', '#8000ff', '#ff00ff', '#ff0080']
 
 lista_anos = df['Ano'].unique().tolist()
 lista_disciplinas = sorted(df['Disciplina'].unique().tolist())
@@ -36,6 +29,7 @@ lista_periodos = df['Período'].unique().tolist()
 
 dtotals = pd.DataFrame(columns = ['Ano', 'Disciplina', 'Período', 'Nota'])
 
+load_figure_template("sketchy")
 #*******************************************************************************************************
 #*******************************************************************************************************
 def addRowinTotals(ano, disciplina, periodo, nota):
