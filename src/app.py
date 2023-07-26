@@ -121,7 +121,7 @@ app.layout = dbc.Container(
             ], style=dict(display='flex')
         ),
 
-        dcc.Graph(id="graph_pie"),
+        dcc.Graph(id="graph_pie", className="mt-3"),
 
         html.Div(
             children=[
