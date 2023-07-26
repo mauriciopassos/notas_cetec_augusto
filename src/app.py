@@ -72,7 +72,7 @@ dfpivot_totals.columns.name = None
 
 app.layout = dbc.Container(
     children = [
-        html.H1("Notas CETEC Augusto Marques dos Passos", style={"text-align": "center", "color": px.colors.qualitative.Pastel[0]}),
+        html.H1("Notas CETEC Augusto Marques dos Passos", style={"text-align": "center", "color": px.colors.qualitative.Prism[2]}),
 
         dcc.Graph(id="graph_histogram"),
 
@@ -203,7 +203,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
     if parciais:    
         fig_histogram = px.bar(dff, x="Período", y="Nota", color="Disciplina", barmode='group', hover_name='Disciplina', hover_data=['Avaliação'],
             text='Nota', height=500, color_discrete_sequence=px.colors.qualitative.Pastel).update_layout(
-            title={"text": titulo_histogram, "x": 0.5}, title_font_color = px.colors.qualitative.Pastel[0],
+            title={"text": titulo_histogram, "x": 0.5}, title_font_color = px.colors.qualitative.Prism[2],
             yaxis_title = "Média no Período",
             paper_bgcolor = 'rgba(0,0,0, 0)',
             # font = {"color": '#839496'},
@@ -214,7 +214,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
     else:
         fig_histogram = px.bar(dff, x="Período", y="Nota", color="Disciplina", barmode='group', hover_name='Disciplina',
             text='Nota', height=500, color_discrete_sequence=px.colors.qualitative.Pastel).update_layout(
-            title={"text": titulo_histogram, "x": 0.5}, title_font_color = px.colors.qualitative.Pastel[0],
+            title={"text": titulo_histogram, "x": 0.5}, title_font_color = px.colors.qualitative.Prism[2],
             yaxis_title = "Média no Período",
             paper_bgcolor = 'rgba(0,0,0,0)',
             # font = {"color": '#839496'},
@@ -234,7 +234,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
     dt = dtotals.query(query).sort_values(by=['Disciplina', 'Período'])
 
     fig_comparativo = px.line().update_layout(
-            title={"text": titulo_comparativo, "x": 0.5}, title_font_color = px.colors.qualitative.Pastel[0],
+            title={"text": titulo_comparativo, "x": 0.5}, title_font_color = px.colors.qualitative.Prism[2],
             yaxis_title="Média do " + periodo, xaxis_title="Disciplina",
             paper_bgcolor = 'rgba(0,0,0,0)'
             )
@@ -252,7 +252,7 @@ def update_graphs(ano, periodo, disciplina, parciais):
 
     titulo_pie = "<b>" + disciplina + " - " + ano + " Ano - Média do " + periodo + ": " + str(soma) + "</b>"
     fig_pie = px.pie(dff, values="Nota", names="Avaliação", hole=.2, color_discrete_sequence=px.colors.qualitative.Pastel2).update_layout(
-        title={"text": titulo_pie, "x": 0.5}, title_font_color = px.colors.qualitative.Pastel[0],
+        title={"text": titulo_pie, "x": 0.5}, title_font_color = px.colors.qualitative.Prism[2],
         paper_bgcolor = 'rgba(0,0,0,0)',
         # font = {"color": '#839496'},
         # font = {"color": '#EBEBEB'},
