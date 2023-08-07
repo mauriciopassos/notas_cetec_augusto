@@ -54,6 +54,7 @@ for a in lista_anos:
             query = "Ano == \'" + a + "\' & Disciplina == \'"+ d + "\' & Período == \'" + p + "\'"
             dff = df.query(query).sort_values(by=['Avaliação'], ascending=False)
             dff = dff[dff['Avaliação'] != 'Média da Turma']
+            
             if p == '3º Trimestre':
                 media_final += dff['Nota'].sum() * 0.4
             else:
