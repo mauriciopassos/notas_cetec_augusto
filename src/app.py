@@ -20,8 +20,8 @@ server = app.server
 
 app.title = 'Notas CETEC Augusto Marques dos Passos'
 
-df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
-# df = pd.read_csv('src/df_notas_cetec_augusto.csv')
+# df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
+df = pd.read_csv('src/df_notas_cetec_augusto.csv')
 
 lista_anos = df['Ano'].unique().tolist()
 lista_disciplinas = sorted(df['Disciplina'].unique().tolist())
@@ -75,6 +75,16 @@ app.layout = dbc.Container(
     children = [
         html.H1("Notas CETEC Augusto Marques dos Passos", style={"text-align": "center", "color": px.colors.qualitative.Prism[2]}),
 
+        html.Div(
+            className="row", children=[
+                html.Div(className='four columns', children=[
+                    dcc.Dropdown(options=lista_anos, value="6º", id='id_dd_ano', clearable=False, className="dbc"),
+                    # dbc.Select(options=lista_anos, value="6º", id='id_dd_ano'),
+                ],style=dict(width='100%')),
+            ], style=dict(display='flex')
+        ),
+
+
         dcc.Graph(id="graph_histogram"),
 
         html.Div(
@@ -106,20 +116,31 @@ app.layout = dbc.Container(
         html.Div(
             className="row", children=[
                 html.Div(className='four columns', children=[
-                    dcc.Dropdown(options=lista_anos, value="6º", id='id_dd_ano', clearable=False, className="dbc"),
-                    # dbc.Select(options=lista_anos, value="6º", id='id_dd_ano'),
-                ],style=dict(width='34%')),
-                
-                html.Div(className='four columns', children=[
                     dcc.Dropdown(options=lista_periodos, value="1º Trimestre", id='id_dd_periodo', clearable=False, className="dbc"),
                     # dbc.Select(options=lista_periodos, value="1º Trimestre", id='id_dd_periodo'),
-                ],style=dict(width='33%')),
+                ],style=dict(width='50%')),
                 
                 html.Div(className='four columns', children=[
-                    dcc.Dropdown(options=lista_disciplinas, value="Língua Portuguesa", id='id_dd_disciplina', clearable=False, className="dbc"),
+                    dcc.Dropdown(options=lista_disciplinas, value="Matemática", id='id_dd_disciplina', clearable=False, className="dbc"),
                     # dbc.Select(options=lista_disciplinas, value="Matemática", id='id_dd_disciplina'),
-                ],style=dict(width='33%')),
+                ],style=dict(width='50%')),
             ], style=dict(display='flex')
+        ),
+
+        html.Div(
+            children=[
+                dbc.Switch(
+                    label ="Mostrar Gráfico de Evolução Trimestral",
+                    value=False,
+                    id="id_check_graph_trimestre",
+                ),
+            ],style={"text-align": "left", "font-size": "0.875em", "padding-top": "15px"}
+        ),
+
+        html.Div(
+            className="row", id="g_trimestre", children=[
+                dcc.Graph(id="graph_trimestre", className="mt-3"),
+            ],
         ),
 
         dcc.Graph(id="graph_pie", className="mt-3"),
@@ -175,6 +196,8 @@ def showTables(check, checkpie):
         Output("graph_comparativo", "figure"),
         Output("graph_pie", "figure"),
         Output("id_tabela_pie", "children"),
+        Output("graph_trimestre", "figure"),
+        Output("g_trimestre", "style"),
     ],
 
     [
@@ -182,10 +205,11 @@ def showTables(check, checkpie):
         Input("id_dd_periodo", "value"),
         Input("id_dd_disciplina", "value"),
         Input("id_check_graph", "value"),
+        Input("id_check_graph_trimestre", "value"),
     ],
 )
 
-def update_graphs(ano, periodo, disciplina, parciais):
+def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre):
 
     query = "Ano == \'" + ano + "\'"
     dff = df.query(query).sort_values(by=['Disciplina', 'Período'])
@@ -263,8 +287,37 @@ def update_graphs(ano, periodo, disciplina, parciais):
 
     # table = dbc.Table.from_dataframe(dff.dropna(subset = ['Nota']), responsive=True, striped=True, bordered=True, hover=True)
     table = dbc.Table.from_dataframe(dff.dropna(subset = ['Nota']), responsive=True, striped=True, bordered=False, hover=True, dark=False, style={'vertical-align' : 'middle'})
+
+
+    titulo_trimestre = "<b>Evolução Trimestral da Disciplina de " + disciplina + "no " + ano + " Ano</b>"
+
+    query = "Ano == \'" + ano + "\' & Disciplina == \'" + disciplina + "\'"
+    dff = df.query(query).sort_values(by=['Período'])
+
+    dfm = dff[dff['Avaliação'] == 'Média da Turma']
+    dfm = dfm.dropna(subset = ['Nota'])
+
+    dt = dtotals.query(query).sort_values(by=['Período'])
     
-    return fig_histogram, fig_comparativo, fig_pie, table
+    
+    fig_trimestre = px.line().update_layout(
+            title={"text": titulo_trimestre, "x": 0.5}, title_font_color = px.colors.qualitative.Prism[2],
+            yaxis_title="Média do Período", xaxis_title="Período",
+            paper_bgcolor = 'rgba(0,0,0,0)'
+            )
+
+    fig_trimestre.add_scatter(x=dt['Período'], y=dt['Nota'], text=dt['Nota'], name=disciplina, marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
+    fig_trimestre.update_traces(textposition='top center', mode="markers+lines+text", showlegend=False, line_shape='spline')
+    fig_trimestre.update_layout(hovermode="x unified")
+
+    g_trimestre_style = {"display": "none",}
+
+    if graph_trimestre:
+        g_trimestre_style = {"display": "block",}
+    else: 
+        g_trimestre_style = {"display": "none",}
+
+    return fig_histogram, fig_comparativo, fig_pie, table, fig_trimestre, g_trimestre_style
 
 if __name__ == '__main__':
     app.run_server(debug=False)
