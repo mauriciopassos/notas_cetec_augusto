@@ -289,7 +289,7 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre):
     table = dbc.Table.from_dataframe(dff.dropna(subset = ['Nota']), responsive=True, striped=True, bordered=False, hover=True, dark=False, style={'vertical-align' : 'middle'})
 
 
-    titulo_trimestre = "<b>Evolução Trimestral da Disciplina de " + disciplina + "no " + ano + " Ano</b>"
+    titulo_trimestre = "<b>Evolução Trimestral da Disciplina de " + disciplina + " no " + ano + " Ano</b>"
 
     query = "Ano == \'" + ano + "\' & Disciplina == \'" + disciplina + "\'"
     dff = df.query(query).sort_values(by=['Período'])
