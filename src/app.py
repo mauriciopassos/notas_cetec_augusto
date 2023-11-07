@@ -20,8 +20,8 @@ server = app.server
 
 app.title = 'Notas CETEC Augusto Marques dos Passos'
 
-df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
-# df = pd.read_csv('src/df_notas_cetec_augusto.csv')
+# df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
+df = pd.read_csv('src/df_notas_cetec_augusto.csv')
 
 lista_anos = df['Ano'].unique().tolist()
 lista_disciplinas = sorted(df['Disciplina'].unique().tolist())
@@ -54,7 +54,7 @@ for a in lista_anos:
             query = "Ano == \'" + a + "\' & Disciplina == \'"+ d + "\' & Período == \'" + p + "\'"
             dff = df.query(query).sort_values(by=['Avaliação'], ascending=False)
             dff = dff[dff['Avaliação'] != 'Média da Turma']
-            
+
             if p == '3º Trimestre':
                 media_final += dff['Nota'].sum() * 0.4
             else:
@@ -307,7 +307,7 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre):
             )
 
     fig_trimestre.add_scatter(x=dt['Período'], y=dt['Nota'], text=dt['Nota'], name=disciplina, marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
-    fig_trimestre.update_traces(textposition='top center', mode="markers+lines+text", showlegend=False, line_shape='spline')
+    fig_trimestre.update_traces(textposition='top center', mode="markers+lines+text", showlegend=False)
     fig_trimestre.update_layout(hovermode="x unified")
 
     g_trimestre_style = {"display": "none",}
