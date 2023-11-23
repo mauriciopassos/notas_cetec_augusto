@@ -112,16 +112,9 @@ dfpivot_totals = dtotals.pivot(index="Disciplina", columns="Período", values="N
 dfpivot_totals = dfpivot_totals.reset_index()
 dfpivot_totals.columns.name = None
 
-# dfa = dfa.reset_index()
-# dfa.columns.name = None
 dfa = dfa.set_index("Ano")
-# print(dfa)
-# dfa.to_csv("temporario.csv")
-
 #*******************************************************************************************************
 #*******************************************************************************************************
-
-
 
 app.layout = dbc.Container(
     children = [
@@ -264,8 +257,8 @@ def showTables(check, checkpie):
 def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre):
 
     query = "Ano == \'" + ano + "\'"
-    # dff = df.query(query).sort_values(by=['Disciplina', 'Período'])
     dff = dfa.query(query).sort_values(by=['Disciplina', 'Período'])
+    # dff = df.query(query).sort_values(by=['Disciplina', 'Período'])
     # dff = dff[dff['Avaliação'] != 'Média da Turma']
 
     if parciais:
@@ -322,30 +315,7 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre):
     fig_comparativo.update_layout(hovermode="x unified")
 
     query = "Ano == \'" + ano + "\' & Disciplina == \'"+ disciplina + "\' & Período == \'" + periodo + "\'"
-    dff = df.query(query).sort_values(by=['Avaliação'])
-    dff = dff[dff['Avaliação'] != 'Média da Turma']
-
-    rec = dff[dff['Avaliação'] == 'Prova Recuperação Pós Trimestre']['Nota']
-    rec_flag = not rec.isnull().values.any()
-    if rec_flag:
-        p1 = dff[dff['Avaliação'] == 'Prova 1']['Nota']
-        p2 = dff[dff['Avaliação'] == 'Prova 2']['Nota']
-        
-        if not p1.isnull().values.any():
-            p1_value = p1.values[0]
-        else:
-            p1_value = 0
-
-        if not p2.isnull().values.any():
-            p2_value = p2.values[0]
-        else:
-            p2_value = 0
-
-        if rec.values[0] > (p1_value + p2_value):
-            dff = dff[dff['Avaliação'] != 'Prova 1']
-            dff = dff[dff['Avaliação'] != 'Prova 2']
-        else:
-            dff = dff[dff['Avaliação'] != 'Prova Recuperação Pós Trimestre']
+    dff = dfa.query(query).sort_values(by=['Avaliação'])
 
     soma = float("{:.1f}".format(dff['Nota'].sum()))
 
