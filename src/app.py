@@ -28,8 +28,25 @@ lista_disciplinas = sorted(df['Disciplina'].unique().tolist())
 lista_periodos = df['Período'].unique().tolist()
 
 dtotals = pd.DataFrame(columns = ['Ano', 'Disciplina', 'Período', 'Nota'])
+dfa = pd.DataFrame(columns = ['Ano','Disciplina','Período','Avaliação','Data da Avaliação','Descrição da Avaliação','Nota'])
 
 load_figure_template("sketchy")
+#*******************************************************************************************************
+#*******************************************************************************************************
+def addRowinDFA(ano, disciplina, periodo, avaliacao, data, descricao, nota):
+
+    dfarow = {
+              "Ano" : ano,
+              "Disciplina" : disciplina,
+              "Período" : periodo,
+              "Avaliação" : avaliacao,
+              "Data da Avaliação" : data,
+              "Descrição da Avaliação" : descricao,
+              "Nota" : nota
+            }
+
+    dfa.loc[len(dfa)] = dfarow
+  
 #*******************************************************************************************************
 #*******************************************************************************************************
 def addRowinTotals(ano, disciplina, periodo, nota):
@@ -41,12 +58,10 @@ def addRowinTotals(ano, disciplina, periodo, nota):
                     "Nota" : nota
     }
 
-    #pd.concat(dtotals, dtotalsrow, ignore_index=True)
     dtotals.loc[len(dtotals)] = dtotalsrow
 
 #*******************************************************************************************************
 #*******************************************************************************************************
-
 for a in lista_anos:
     for d in lista_disciplinas:
         media_final = 0
@@ -55,6 +70,28 @@ for a in lista_anos:
             dff = df.query(query).sort_values(by=['Avaliação'], ascending=False)
             dff = dff[dff['Avaliação'] != 'Média da Turma']
 
+            rec = dff[dff['Avaliação'] == 'Prova Recuperação Pós Trimestre']['Nota']
+            rec_flag = not rec.isnull().values.any()
+            if rec_flag:
+                p1 = dff[dff['Avaliação'] == 'Prova 1']['Nota']
+                p2 = dff[dff['Avaliação'] == 'Prova 2']['Nota']
+                
+                if not p1.isnull().values.any():
+                    p1_value = p1.values[0]
+                else:
+                    p1_value = 0
+
+                if not p2.isnull().values.any():
+                    p2_value = p2.values[0]
+                else:
+                    p2_value = 0
+
+                if rec.values[0] > (p1_value + p2_value):
+                    dff = dff[dff['Avaliação'] != 'Prova 1']
+                    dff = dff[dff['Avaliação'] != 'Prova 2']
+                else:
+                    dff = dff[dff['Avaliação'] != 'Prova Recuperação Pós Trimestre']
+
             if p == '3º Trimestre':
                 media_final += dff['Nota'].sum() * 0.4
             else:
@@ -62,13 +99,28 @@ for a in lista_anos:
 
             addRowinTotals(a, d, p, float("{:.1f}".format(dff['Nota'].sum())))
 
+            dfs = [dfa, dff]
+            dfa = pd.concat(dfs)
+
         # addRowinTotals(a, d, "Média Final", float("{:.1f}".format(soma / len(lista_periodos))))
         addRowinTotals(a, d, "Média Final", float("{:.1f}".format(media_final)))
 
+#*******************************************************************************************************
+#*******************************************************************************************************
 dfpivot_totals = dtotals.pivot(index="Disciplina", columns="Período", values="Nota")
 
 dfpivot_totals = dfpivot_totals.reset_index()
 dfpivot_totals.columns.name = None
+
+# dfa = dfa.reset_index()
+# dfa.columns.name = None
+dfa = dfa.set_index("Ano")
+# print(dfa)
+# dfa.to_csv("temporario.csv")
+
+#*******************************************************************************************************
+#*******************************************************************************************************
+
 
 
 app.layout = dbc.Container(
@@ -130,7 +182,7 @@ app.layout = dbc.Container(
         html.Div(
             children=[
                 dbc.Switch(
-                    label ="Mostrar Gráfico de Evolução Trimestral",
+                    label ="Mostrar gráfico de evolução trimestral",
                     value=False,
                     id="id_check_graph_trimestre",
                 ),
@@ -212,9 +264,9 @@ def showTables(check, checkpie):
 def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre):
 
     query = "Ano == \'" + ano + "\'"
-    dff = df.query(query).sort_values(by=['Disciplina', 'Período'])
-
-    dff = dff[dff['Avaliação'] != 'Média da Turma']
+    # dff = df.query(query).sort_values(by=['Disciplina', 'Período'])
+    dff = dfa.query(query).sort_values(by=['Disciplina', 'Período'])
+    # dff = dff[dff['Avaliação'] != 'Média da Turma']
 
     if parciais:
         dff = pd.DataFrame(dff.groupby(by=['Disciplina', 'Período', 'Avaliação'])['Nota'].sum())
@@ -273,6 +325,28 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre):
     dff = df.query(query).sort_values(by=['Avaliação'])
     dff = dff[dff['Avaliação'] != 'Média da Turma']
 
+    rec = dff[dff['Avaliação'] == 'Prova Recuperação Pós Trimestre']['Nota']
+    rec_flag = not rec.isnull().values.any()
+    if rec_flag:
+        p1 = dff[dff['Avaliação'] == 'Prova 1']['Nota']
+        p2 = dff[dff['Avaliação'] == 'Prova 2']['Nota']
+        
+        if not p1.isnull().values.any():
+            p1_value = p1.values[0]
+        else:
+            p1_value = 0
+
+        if not p2.isnull().values.any():
+            p2_value = p2.values[0]
+        else:
+            p2_value = 0
+
+        if rec.values[0] > (p1_value + p2_value):
+            dff = dff[dff['Avaliação'] != 'Prova 1']
+            dff = dff[dff['Avaliação'] != 'Prova 2']
+        else:
+            dff = dff[dff['Avaliação'] != 'Prova Recuperação Pós Trimestre']
+
     soma = float("{:.1f}".format(dff['Nota'].sum()))
 
     titulo_pie = "<b>" + disciplina + " - " + ano + " Ano - Média do " + periodo + ": " + str(soma) + "</b>"
@@ -285,7 +359,9 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre):
     )
     fig_pie.update_traces(textposition="inside", textinfo="percent+label")
 
-    # table = dbc.Table.from_dataframe(dff.dropna(subset = ['Nota']), responsive=True, striped=True, bordered=True, hover=True)
+    dff = df.query(query).sort_values(by=['Avaliação'])
+    dff = dff[dff['Avaliação'] != 'Média da Turma']
+
     table = dbc.Table.from_dataframe(dff.dropna(subset = ['Nota']), responsive=True, striped=True, bordered=False, hover=True, dark=False, style={'vertical-align' : 'middle'})
 
 
