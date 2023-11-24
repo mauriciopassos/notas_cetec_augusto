@@ -188,8 +188,6 @@ app.layout = dbc.Container(
             ],
         ),
 
-        dcc.Graph(id="graph_pie", className="mt-3"),
-
         html.Div(
             children=[
                 dbc.Switch(
@@ -201,6 +199,8 @@ app.layout = dbc.Container(
         ),
 
         html.Div(id="id_tabela_pie"),
+
+        dcc.Graph(id="graph_pie", className="mt-3"),
 
         dcc.Graph(id="graph_comparativo"),
     ],style={"text-align": "center"}
