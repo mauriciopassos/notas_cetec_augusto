@@ -107,7 +107,7 @@ for a in lista_anos:
 
 #*******************************************************************************************************
 #*******************************************************************************************************
-dfpivot_totals = dtotals.pivot(index="Disciplina", columns="Período", values="Nota")
+dfpivot_totals = dtotals.pivot(index=["Ano","Disciplina"], columns="Período", values="Nota")
 
 dfpivot_totals = dfpivot_totals.reset_index()
 dfpivot_totals.columns.name = None
@@ -152,11 +152,13 @@ app.layout = dbc.Container(
             ],style={"text-align": "left", "font-size": "0.875em"}
         ),
 
-        html.Div(children=[
-                    dbc.Table.from_dataframe(dfpivot_totals, responsive=True, striped=True, bordered=False, hover=True, dark=False)
-                ],
-                id="aprov_trimestral", 
-            ),
+        # html.Div(children=[
+        #             dbc.Table.from_dataframe(dfpivot_totals, responsive=True, striped=True, bordered=False, hover=True, dark=False)
+        #         ],
+        #         id="id_tabela_totais", 
+        #     ),
+
+        html.Div(id="id_tabela_totais"),
 
         html.Div(
             className="row", children=[
@@ -208,7 +210,7 @@ app.layout = dbc.Container(
 
 @app.callback(
     [
-        Output("aprov_trimestral", "style"),
+        Output("id_tabela_totais", "style"),
         Output("id_tabela_pie", "style"),
     ],
     
@@ -243,6 +245,7 @@ def showTables(check, checkpie):
         Output("id_tabela_pie", "children"),
         Output("graph_trimestre", "figure"),
         Output("g_trimestre", "style"),
+        Output("id_tabela_totais", "children"),
     ],
 
     [
@@ -363,7 +366,11 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre):
     else: 
         g_trimestre_style = {"display": "none",}
 
-    return fig_histogram, fig_comparativo, fig_pie, table, fig_trimestre, g_trimestre_style
+    query = "Ano == \'" + ano + "\'"
+    dfp_totals = dfpivot_totals.query(query)
+    tabela_totais = dbc.Table.from_dataframe(dfp_totals, responsive=True, striped=True, bordered=False, hover=True, dark=False)
+
+    return fig_histogram, fig_comparativo, fig_pie, table, fig_trimestre, g_trimestre_style, tabela_totais
 
 if __name__ == '__main__':
     app.run_server(debug=False)
