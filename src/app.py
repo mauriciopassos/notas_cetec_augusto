@@ -14,7 +14,7 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.SKETCHY],
                         'content': 'width=device-width, initial-scale=1.0'},
                         {'http-equiv': 'content-language',
                         'content': 'pt-br'},
-                    ]
+                      ]
         )
 server = app.server
 
