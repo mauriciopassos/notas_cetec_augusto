@@ -59,6 +59,24 @@ def addRowinTotals(ano, disciplina, periodo, nota):
     }
 
     dtotals.loc[len(dtotals)] = dtotalsrow
+#*******************************************************************************************************
+#*******************************************************************************************************
+def get_Epoca_Turma(ano):
+    query = "Ano == \'" + ano + "\'"
+    dff = df.query(query)
+    epoca = dff['Época'].values[0]
+    turma = dff['Turma'].values[0]
+
+    # {'label': '6º Ano - 2023', 'value': '6º'},
+    l = ano + " Ano " + str(turma) + " - " + str(epoca)
+    return {'label': l, 'value': ano}
+
+#*******************************************************************************************************
+#*******************************************************************************************************
+
+lista_anos_epoca_turma = []
+for a in lista_anos:
+    lista_anos_epoca_turma.append(get_Epoca_Turma(a))
 
 #*******************************************************************************************************
 #*******************************************************************************************************
@@ -123,8 +141,8 @@ app.layout = dbc.Container(
         html.Div(
             className="row", children=[
                 html.Div(className='four columns', children=[
-                    dcc.Dropdown(options=lista_anos, value="7º", id='id_dd_ano', clearable=False, className="dbc"),
-                    # dbc.Select(options=lista_anos, value="6º", id='id_dd_ano'),
+                    dcc.Dropdown(options=lista_anos_epoca_turma, value="7º", id='id_dd_ano', clearable=False, className="dbc"),
+                    # dcc.Dropdown(options=lista_anos, value="7º", id='id_dd_ano', clearable=False, className="dbc"),
                 ],style=dict(width='100%')),
             ], style=dict(display='flex')
         ),
