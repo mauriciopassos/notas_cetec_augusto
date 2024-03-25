@@ -67,13 +67,12 @@ def get_Epoca_Turma(ano):
     epoca = dff['Época'].values[0]
     turma = dff['Turma'].values[0]
 
-    # {'label': '6º Ano - 2023', 'value': '6º'},
+    # {'label': '6º Ano B - 2023', 'value': '6º'},
     l = ano + " Ano " + str(turma) + " - " + str(epoca)
     return {'label': l, 'value': ano}
 
 #*******************************************************************************************************
 #*******************************************************************************************************
-
 lista_anos_epoca_turma = []
 for a in lista_anos:
     lista_anos_epoca_turma.append(get_Epoca_Turma(a))
@@ -169,12 +168,6 @@ app.layout = dbc.Container(
                 ),
             ],style={"text-align": "left", "font-size": "0.875em"}
         ),
-
-        # html.Div(children=[
-        #             dbc.Table.from_dataframe(dfpivot_totals, responsive=True, striped=True, bordered=False, hover=True, dark=False)
-        #         ],
-        #         id="id_tabela_totais", 
-        #     ),
 
         html.Div(id="id_tabela_totais"),
 
@@ -365,7 +358,7 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre):
     dfm = dfm.dropna(subset = ['Nota'])
 
     dt = dtotals.query(query).sort_values(by=['Período'])
-    
+
     
     fig_trimestre = px.line().update_layout(
             title={"text": titulo_trimestre, "x": 0.5}, title_font_color = px.colors.qualitative.Prism[2],
