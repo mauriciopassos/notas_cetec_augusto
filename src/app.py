@@ -307,7 +307,11 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre):
         )
         fig_histogram.update_yaxes(gridcolor="#CCC")
 
-    titulo_comparativo = "<b>Comparativo com a Média da Turma no " + periodo + "</b>"
+
+    if ano == "6º":
+      titulo_comparativo = "<b>Comparativo com a Média da Turma no " + periodo + "</b>"
+    else:
+      titulo_comparativo = "<b>Comparativo com a Média dos outros Anos no " + periodo + "</b>"
 
     query = "Ano == \'" + ano + "\' & Período == \'" + periodo + "\'"
     dff = df.query(query).sort_values(by=['Disciplina', 'Período'])
@@ -323,8 +327,21 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre):
             paper_bgcolor = 'rgba(0,0,0,0)'
             )
 
-    fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], text=dt['Nota'], name="Média do Augusto", marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
-    fig_comparativo.add_scatter(x=dfm['Disciplina'], y=dfm['Nota'], text=dfm['Nota'], name="Média da Turma", marker_color=px.colors.qualitative.Light24[23], textfont_color=px.colors.qualitative.Light24[22])
+    i = 0
+    for a in lista_anos:
+      if ano == "6º":
+        fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], text=dt['Nota'], name="Média do Augusto", marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
+        fig_comparativo.add_scatter(x=dfm['Disciplina'], y=dfm['Nota'], text=dfm['Nota'], name="Média da Turma", marker_color=px.colors.qualitative.Light24[23], textfont_color=px.colors.qualitative.Light24[22])
+        break
+
+      if a != ano:
+        query = "Ano == \'" + a + "\' & Período == \'" + periodo + "\'"
+        dtb = dtotals.query(query).sort_values(by=['Disciplina', 'Período'])
+
+        fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], text=dt['Nota'], name="Média do " + ano + " Ano", marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
+        fig_comparativo.add_scatter(x=dtb['Disciplina'], y=dtb['Nota'], text=dtb['Nota'], name="Média do " + a + " Ano", marker_color=px.colors.qualitative.Light24[23-i], textfont_color=px.colors.qualitative.Light24[23-i])
+        i = i + 1
+    
     fig_comparativo.update_traces(textposition='top center', mode="markers+lines+text", showlegend=True, line_shape='spline')
     fig_comparativo.update_layout(hovermode="x unified")
 
