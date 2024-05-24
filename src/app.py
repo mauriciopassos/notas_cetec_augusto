@@ -28,12 +28,12 @@ lista_disciplinas = sorted(df['Disciplina'].unique().tolist())
 lista_periodos = df['Período'].unique().tolist()
 
 dtotals = pd.DataFrame(columns = ['Ano', 'Disciplina', 'Período', 'Nota'])
-dfa = pd.DataFrame(columns = ['Ano','Disciplina','Período','Avaliação','Data da Avaliação','Descrição da Avaliação','Nota'])
+dfa = pd.DataFrame(columns = ['Ano','Disciplina','Período','Avaliação','Data da Avaliação','Descrição da Avaliação','Pontuação','Nota','%'])
 
 load_figure_template("sketchy")
 #*******************************************************************************************************
 #*******************************************************************************************************
-def addRowinDFA(ano, disciplina, periodo, avaliacao, data, descricao, nota):
+def addRowinDFA(ano, disciplina, periodo, avaliacao, data, descricao, pontuacao, nota, percentual):
 
     dfarow = {
               "Ano" : ano,
@@ -42,7 +42,9 @@ def addRowinDFA(ano, disciplina, periodo, avaliacao, data, descricao, nota):
               "Avaliação" : avaliacao,
               "Data da Avaliação" : data,
               "Descrição da Avaliação" : descricao,
-              "Nota" : nota
+              "Pontuação" : pontuacao,
+              "Nota" : nota,
+              "%": percentual
             }
 
     dfa.loc[len(dfa)] = dfarow
@@ -129,7 +131,7 @@ dfpivot_totals = dtotals.pivot(index=["Ano","Disciplina"], columns="Período", v
 dfpivot_totals = dfpivot_totals.reset_index()
 dfpivot_totals.columns.name = None
 
-dfa = dfa.set_index("Ano")
+dfa = dfa.set_index('Ano')
 #*******************************************************************************************************
 #*******************************************************************************************************
 
@@ -376,9 +378,12 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre, linha_med
 
     dff = df.query(query).sort_values(by=['Avaliação'])
     dff = dff[dff['Avaliação'] != 'Média da Turma']
+    dff = dff.dropna(subset = ['Nota'])
 
-    table = dbc.Table.from_dataframe(dff.dropna(subset = ['Nota']), responsive=True, striped=True, bordered=False, hover=True, dark=False, style={'vertical-align' : 'middle'})
+    dff['%'] = dff['Nota'] / dff['Pontuação']
+    dff['%'] = dff['%'].apply(lambda x: "{:.2f}%".format(x * 100))
 
+    table = dbc.Table.from_dataframe(dff, responsive=True, striped=True, bordered=False, hover=True, dark=False, style={'vertical-align' : 'middle'})
 
     titulo_trimestre = "<b>Evolução Trimestral da Disciplina de " + disciplina + " no " + ano + " Ano</b>"
 
