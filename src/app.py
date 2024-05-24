@@ -152,6 +152,16 @@ app.layout = dbc.Container(
         html.Div(
             children=[
                 dbc.Switch(
+                    label ="Mostrar linha de média no gráfico",
+                    value=False,
+                    id="id_check_avarage_line",
+                ),
+            ],style={"text-align": "left", "font-size": "0.875em"}
+        ),
+
+        html.Div(
+            children=[
+                dbc.Switch(
                     label ="Mostrar parciais no gráfico",
                     value=False,
                     id="id_check_graph",
@@ -265,10 +275,11 @@ def showTables(check, checkpie):
         Input("id_dd_disciplina", "value"),
         Input("id_check_graph", "value"),
         Input("id_check_graph_trimestre", "value"),
+        Input("id_check_avarage_line", "value"),
     ],
 )
 
-def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre):
+def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre, linha_media):
 
     query = "Ano == \'" + ano + "\'"
     dff = dfa.query(query).sort_values(by=['Disciplina', 'Período'])
@@ -306,6 +317,9 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre):
             # plot_bgcolor = 'rgba(0,0,0, 0)',
         )
         fig_histogram.update_yaxes(gridcolor="#CCC")
+
+    if linha_media:
+        fig_histogram.add_hline(y=7, line_color="#e06666")
 
 
     if ano == "6º":
