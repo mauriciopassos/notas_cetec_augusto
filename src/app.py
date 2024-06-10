@@ -395,7 +395,6 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre, linha_med
 
     dt = dtotals.query(query).sort_values(by=['Período'])
 
-    
     fig_trimestre = px.line().update_layout(
             title={"text": titulo_trimestre, "x": 0.5}, title_font_color = px.colors.qualitative.Prism[2],
             yaxis_title="Média do Período", xaxis_title="Período",
