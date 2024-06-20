@@ -186,7 +186,7 @@ app.layout = dbc.Container(
         html.Div(
             className="row", children=[
                 html.Div(className='four columns', children=[
-                    dcc.Dropdown(options=lista_periodos, value="1º Trimestre", id='id_dd_periodo', clearable=False, className="dbc"),
+                    dcc.Dropdown(options=lista_periodos, value="2º Trimestre", id='id_dd_periodo', clearable=False, className="dbc"),
                     # dbc.Select(options=lista_periodos, value="1º Trimestre", id='id_dd_periodo'),
                 ],style=dict(width='50%')),
                 
