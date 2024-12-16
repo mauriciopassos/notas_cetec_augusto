@@ -186,7 +186,7 @@ app.layout = dbc.Container(
         html.Div(
             className="row", children=[
                 html.Div(className='four columns', children=[
-                    dcc.Dropdown(options=lista_periodos, value="3º Trimestre", id='id_dd_periodo', clearable=False, className="dbc"),
+                    dcc.Dropdown(options=lista_periodos, value="1º Trimestre", id='id_dd_periodo', clearable=False, className="dbc"),
                     # dbc.Select(options=lista_periodos, value="1º Trimestre", id='id_dd_periodo'),
                 ],style=dict(width='50%')),
                 
@@ -279,6 +279,8 @@ def showTables(check, checkpie):
         Input("id_check_graph_trimestre", "value"),
         Input("id_check_avarage_line", "value"),
     ],
+    # prevent_initial_call=True,
+    # suppress_callback_exceptions=True,
 )
 
 def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre, linha_media):
@@ -354,9 +356,12 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre, linha_med
         query = "Ano == \'" + a + "\' & Período == \'" + periodo + "\'"
         dtb = dtotals.query(query).sort_values(by=['Disciplina', 'Período'])
 
-        fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], text=dt['Nota'], name="Média do " + ano + " Ano", marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
+        # fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], text=dt['Nota'], name="Média do " + ano + " Ano", marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
         fig_comparativo.add_scatter(x=dtb['Disciplina'], y=dtb['Nota'], text=dtb['Nota'], name="Média do " + a + " Ano", marker_color=px.colors.qualitative.Light24[23-i], textfont_color=px.colors.qualitative.Light24[23-i])
         i = i + 1
+
+      if a == ano:
+        fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], text=dt['Nota'], name="Média do " + ano + " Ano", marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
     
     fig_comparativo.update_traces(textposition='top center', mode="markers+lines+text", showlegend=True, line_shape='spline')
     fig_comparativo.update_layout(hovermode="x unified")
