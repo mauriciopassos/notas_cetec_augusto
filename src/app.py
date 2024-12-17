@@ -20,8 +20,8 @@ server = app.server
 
 app.title = 'Notas CETEC Augusto Marques dos Passos'
 
-df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
-# df = pd.read_csv('src/df_notas_cetec_augusto.csv')
+# df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
+df = pd.read_csv('src/df_notas_cetec_augusto.csv')
 
 lista_anos = df['Ano'].unique().tolist()
 lista_disciplinas = sorted(df['Disciplina'].unique().tolist())
@@ -390,24 +390,32 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre, linha_med
 
     table = dbc.Table.from_dataframe(dff, responsive=True, striped=True, bordered=False, hover=True, dark=False, style={'vertical-align' : 'middle'})
 
-    titulo_trimestre = "<b>Evolução Trimestral da Disciplina de " + disciplina + " no " + ano + " Ano</b>"
-
-    query = "Ano == \'" + ano + "\' & Disciplina == \'" + disciplina + "\'"
-    dff = df.query(query).sort_values(by=['Período'])
-
-    dfm = dff[dff['Avaliação'] == 'Média da Turma']
-    dfm = dfm.dropna(subset = ['Nota'])
-
-    dt = dtotals.query(query).sort_values(by=['Período'])
+    titulo_trimestre = "<b>Evolução Trimestral da Disciplina de " + disciplina + "</b>"
 
     fig_trimestre = px.line().update_layout(
             title={"text": titulo_trimestre, "x": 0.5}, title_font_color = px.colors.qualitative.Prism[2],
             yaxis_title="Média do Período", xaxis_title="Período",
             paper_bgcolor = 'rgba(0,0,0,0)'
-            )
+            )    
 
-    fig_trimestre.add_scatter(x=dt['Período'], y=dt['Nota'], text=dt['Nota'], name=disciplina, marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
-    fig_trimestre.update_traces(textposition='top center', mode="markers+lines+text", showlegend=False)
+    i = 0
+    for a in lista_anos:
+      query = "Ano == \'" + a + "\' & Disciplina == \'" + disciplina + "\'"
+      dff = df.query(query).sort_values(by=['Período'])
+
+      dfm = dff[dff['Avaliação'] == 'Média da Turma']
+      dfm = dfm.dropna(subset = ['Nota'])
+
+      dt = dtotals.query(query).sort_values(by=['Período'])
+
+      if a == ano:
+        fig_trimestre.add_scatter(x=dt['Período'], y=dt['Nota'], text=dt['Nota'], name=a, marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
+      else:
+        fig_trimestre.add_scatter(x=dt['Período'], y=dt['Nota'], text=dt['Nota'], name=a, marker_color=px.colors.qualitative.Light24[23-i], textfont_color=px.colors.qualitative.Light24[23-i])
+        i = i + 1
+
+
+    fig_trimestre.update_traces(textposition='top center', mode="markers+lines+text", showlegend=True, line_shape='spline')
     fig_trimestre.update_layout(hovermode="x unified")
 
     g_trimestre_style = {"display": "none",}
@@ -424,4 +432,5 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre, linha_med
     return fig_histogram, fig_comparativo, fig_pie, table, fig_trimestre, g_trimestre_style, tabela_totais
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    # app.run_server(debug=False)
+    app.run_server(debug=True)
