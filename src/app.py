@@ -20,8 +20,8 @@ server = app.server
 
 app.title = 'Notas CETEC Augusto Marques dos Passos'
 
-# df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
-df = pd.read_csv('src/df_notas_cetec_augusto.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
+# df = pd.read_csv('src/df_notas_cetec_augusto.csv')
 
 lista_anos = df['Ano'].unique().tolist()
 lista_disciplinas = sorted(df['Disciplina'].unique().tolist())
@@ -432,5 +432,4 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre, linha_med
     return fig_histogram, fig_comparativo, fig_pie, table, fig_trimestre, g_trimestre_style, tabela_totais
 
 if __name__ == '__main__':
-    # app.run_server(debug=False)
-    app.run_server(debug=True)
+    app.run_server(debug=False)
