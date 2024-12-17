@@ -361,7 +361,7 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre, linha_med
         i = i + 1
 
       if a == ano:
-        fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], text=dt['Nota'], name="Média do " + ano + " Ano", marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
+        fig_comparativo.add_scatter(x=dt['Disciplina'], y=dt['Nota'], text=dt['Nota'], name="Média do " + ano + " Ano", marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1], line={'width': 4})
     
     fig_comparativo.update_traces(textposition='top center', mode="markers+lines+text", showlegend=True, line_shape='spline')
     fig_comparativo.update_layout(hovermode="x unified")
@@ -409,7 +409,8 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre, linha_med
       dt = dtotals.query(query).sort_values(by=['Período'])
 
       if a == ano:
-        fig_trimestre.add_scatter(x=dt['Período'], y=dt['Nota'], text=dt['Nota'], name=a, marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1])
+        fig_trimestre.add_scatter(x=dt['Período'], y=dt['Nota'], text=dt['Nota'], name=a, marker_color=px.colors.qualitative.Prism[2], textfont_color=px.colors.qualitative.Prism[1], line={'width': 4})
+        # fig_trimestre.update_traces(line={'width': 4})
       else:
         fig_trimestre.add_scatter(x=dt['Período'], y=dt['Nota'], text=dt['Nota'], name=a, marker_color=px.colors.qualitative.Light24[23-i], textfont_color=px.colors.qualitative.Light24[23-i])
         i = i + 1
