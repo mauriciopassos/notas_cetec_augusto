@@ -30,6 +30,7 @@ lista_disciplinas = sorted(df['Disciplina'].unique().tolist())
 lista_periodos = df['Período'].unique().tolist()
 
 lista_periodos_apo = df_apo['Período'].unique().tolist()
+ddc_periodo_apo = dcc.Dropdown(id='id_dd_periodo_apo', clearable=False, className="dbc")
 ddc_disciplina_apo = dcc.Dropdown(id='id_dd_disciplina_apo', clearable=False, className="dbc")
 
 dtotals = pd.DataFrame(columns = ['Ano', 'Disciplina', 'Período', 'Nota'])
@@ -238,10 +239,12 @@ app.layout = dbc.Container(
 
         html.Div(
             className="row", children=[
-                
-                html.Div(className='four columns', children=[
-                    dcc.Dropdown(options=lista_periodos_apo, value="1º Semestre", id='id_dd_periodo_apo', clearable=False, className="dbc"),
-                ],style=dict(width='50%')),
+
+                html.Div(className='four columns', 
+                            id = "id_ddc_periodo_apo",
+                            children = ddc_periodo_apo,
+                            style=dict(width='50%')
+                        ),
 
                 html.Div(className='four columns', 
                             id = "id_ddc_disciplina_apo",
@@ -264,6 +267,7 @@ app.layout = dbc.Container(
 
 @app.callback(
   [
+    Output("id_ddc_periodo_apo", "children"),
     Output("id_ddc_disciplina_apo", "children"),
   ],
 
@@ -272,8 +276,10 @@ app.layout = dbc.Container(
   ],
 )
 
-def dcc_disciplinas_apo(ano):
+def dcc_entradas_apo(ano):
     
+    ddc_periodo_apo = dcc.Dropdown(options=lista_periodos_apo, value=lista_periodos_apo[0], id='id_dd_periodo_apo', clearable=False, className="dbc")
+
     query = "Ano == \'%s\'" % str(ano)
     dff_apo = df_apo.query(query)
 
@@ -281,7 +287,7 @@ def dcc_disciplinas_apo(ano):
 
     ddc_disciplina_apo = dcc.Dropdown(options=lista_disciplinas_apo, value=lista_disciplinas_apo[0], id='id_dd_disciplina_apo', clearable=False, className="dbc"),
 
-    return ddc_disciplina_apo
+    return ddc_periodo_apo, ddc_disciplina_apo
 
 #*******************************************************************************************************
 #*******************************************************************************************************
