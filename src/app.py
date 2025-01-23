@@ -21,11 +21,16 @@ server = app.server
 app.title = 'Notas CETEC Augusto Marques dos Passos'
 
 df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
+df_apo = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_pareceres_cetec_augusto.csv')
 # df = pd.read_csv('src/df_notas_cetec_augusto.csv')
+# df_apo = pd.read_csv('src/df_pareceres_cetec_augusto.csv')
 
 lista_anos = df['Ano'].unique().tolist()
 lista_disciplinas = sorted(df['Disciplina'].unique().tolist())
 lista_periodos = df['Período'].unique().tolist()
+
+lista_periodos_apo = df_apo['Período'].unique().tolist()
+ddc_disciplina_apo = dcc.Dropdown(id='id_dd_disciplina_apo', clearable=False, className="dbc")
 
 dtotals = pd.DataFrame(columns = ['Ano', 'Disciplina', 'Período', 'Nota'])
 dfa = pd.DataFrame(columns = ['Ano','Disciplina','Período','Avaliação','Data da Avaliação','Descrição da Avaliação','Pontuação','Nota','%'])
@@ -228,8 +233,93 @@ app.layout = dbc.Container(
         dcc.Graph(id="graph_pie", className="mt-3"),
 
         dcc.Graph(id="graph_comparativo"),
+
+        html.H1(id = "id_pareceres_title", className="mt-5", style={"font-size": "180%", "text-align": "center", "color": px.colors.qualitative.Prism[2]}),
+
+        html.Div(
+            className="row", children=[
+                
+                html.Div(className='four columns', children=[
+                    dcc.Dropdown(options=lista_periodos_apo, value="1º Semestre", id='id_dd_periodo_apo', clearable=False, className="dbc"),
+                ],style=dict(width='50%')),
+
+                html.Div(className='four columns', 
+                            id = "id_ddc_disciplina_apo",
+                            children = ddc_disciplina_apo,
+                            style=dict(width='50%')
+                        ),
+            ],style=dict(display='flex')
+        ),
+
+        html.H4(id = "id_pareceres_subtitle", className="mt-5", style={"font-weight": "bold", "text-align": "center", "color": px.colors.qualitative.Prism[2]}),
+
+        dcc.Markdown(className="mt-4", id="id_dcm_parecer_apo", style={"text-align": "left"},),
+
+
     ],style={"text-align": "center"}
 )
+
+#*******************************************************************************************************
+#*******************************************************************************************************
+
+@app.callback(
+  [
+    Output("id_ddc_disciplina_apo", "children"),
+  ],
+
+  [
+    Input("id_dd_ano", "value"),
+  ],
+)
+
+def dcc_disciplinas_apo(ano):
+    
+    query = "Ano == \'%s\'" % str(ano)
+    dff_apo = df_apo.query(query)
+
+    lista_disciplinas_apo = sorted(dff_apo['Disciplina'].unique().tolist())
+
+    ddc_disciplina_apo = dcc.Dropdown(options=lista_disciplinas_apo, value=lista_disciplinas_apo[0], id='id_dd_disciplina_apo', clearable=False, className="dbc", persistence=True, persistence_type="session"),
+
+    return ddc_disciplina_apo
+
+#*******************************************************************************************************
+#*******************************************************************************************************
+
+@app.callback(
+    [
+      Output("id_pareceres_title", "children"),
+      Output("id_pareceres_subtitle", "children"),
+      Output("id_dcm_parecer_apo", "children"),
+    ],
+
+    [
+      Input("id_dd_ano", "value"),
+      Input("id_dd_periodo_apo", "value"),
+      Input("id_dd_disciplina_apo", "value"),
+    ],
+)
+
+def pareceres(ano, periodo_apo, disciplina_apo):
+
+    pareceres_titulo = "Pareceres do %s Ano" % str(ano)
+    pareceres_subtitulo = "Parecer do %s da %s" % (str(periodo_apo), str(disciplina_apo))
+
+    query = "Ano == \'%s\' & Período == \'%s\' & Disciplina == \'%s\'" % (str(ano), str(periodo_apo), str(disciplina_apo))
+    dff_apo = df_apo.query(query)
+
+    parecer = dff_apo['Parecer']
+
+    if parecer.isnull().values.any():
+      parecer_apo = '''Parecer da disciplina não cadastrado no período.'''
+    else:
+      parecer_apo = parecer
+
+    return pareceres_titulo, pareceres_subtitulo, parecer_apo
+
+
+#*******************************************************************************************************
+#*******************************************************************************************************
 
 @app.callback(
     [
@@ -259,6 +349,8 @@ def showTables(check, checkpie):
             else:
                 return fl, fl
 
+#*******************************************************************************************************
+#*******************************************************************************************************
 
 @app.callback(
     [
