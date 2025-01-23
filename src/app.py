@@ -279,7 +279,7 @@ def dcc_disciplinas_apo(ano):
 
     lista_disciplinas_apo = sorted(dff_apo['Disciplina'].unique().tolist())
 
-    ddc_disciplina_apo = dcc.Dropdown(options=lista_disciplinas_apo, value=lista_disciplinas_apo[0], id='id_dd_disciplina_apo', clearable=False, className="dbc", persistence=True, persistence_type="session"),
+    ddc_disciplina_apo = dcc.Dropdown(options=lista_disciplinas_apo, value=lista_disciplinas_apo[0], id='id_dd_disciplina_apo', clearable=False, className="dbc"),
 
     return ddc_disciplina_apo
 
