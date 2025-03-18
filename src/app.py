@@ -124,8 +124,14 @@ for a in lista_anos:
 
             addRowinTotals(a, d, p, float("{:.1f}".format(dff['Nota'].sum())))
 
-            dfs = [dfa, dff]
-            dfa = pd.concat(dfs)
+            # dfs = [dfa, dff]
+            # dfa = pd.concat(dfs)
+            dfa = pd.concat([dfa, dff])
+
+            # print(dfa)
+
+            # def addRowinDFA(ano, disciplina, periodo, avaliacao, data, descricao, pontuacao, nota, percentual):
+            # addRowinDFA(a, d, p, dff["Avaliação"], dff["Data da Avaliação"], dff["Descrição da Avaliação"], dff["Pontuação"], dff["Nota"], "")
 
         # addRowinTotals(a, d, "Média Final", float("{:.1f}".format(soma / len(lista_periodos))))
         addRowinTotals(a, d, "Média Final", float("{:.1f}".format(media_final)))
