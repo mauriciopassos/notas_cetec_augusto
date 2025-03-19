@@ -421,7 +421,7 @@ def update_graphs(ano, periodo, disciplina, parciais, graph_trimestre, linha_med
         fig_histogram.update_yaxes(gridcolor="#CCC")
     else:
         fig_histogram = px.bar(dff, x="Período", y="Nota", color="Disciplina", barmode='group', hover_name='Disciplina',
-            text='Nota', height=500, color_discrete_sequence=px.colors.qualitative.Pastel).update_layout(
+            text="Nota", height=500, color_discrete_sequence=px.colors.qualitative.Pastel).update_layout(
             title={"text": titulo_histogram, "x": 0.5}, title_font_color = px.colors.qualitative.Prism[2],
             yaxis_title = "Média no Período",
             paper_bgcolor = 'rgba(0,0,0,0)',
