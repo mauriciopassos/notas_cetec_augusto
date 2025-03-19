@@ -34,12 +34,12 @@ ddc_periodo_apo = dcc.Dropdown(id='id_dd_periodo_apo', clearable=False, classNam
 ddc_disciplina_apo = dcc.Dropdown(id='id_dd_disciplina_apo', clearable=False, className="dbc")
 
 dtotals = pd.DataFrame(columns = ['Ano', 'Disciplina', 'Período', 'Nota'])
-dfa = pd.DataFrame(columns = ['Ano','Disciplina','Período','Avaliação','Data da Avaliação','Descrição da Avaliação','Pontuação','Nota','%'])
+dfa = pd.DataFrame(columns = ['Ano','Disciplina','Período','Avaliação','Data da Avaliação','Descrição da Avaliação','Pontuação','Nota','%','Turma','Época'])
 
 load_figure_template("sketchy")
 #*******************************************************************************************************
 #*******************************************************************************************************
-def addRowinDFA(ano, disciplina, periodo, avaliacao, data, descricao, pontuacao, nota, percentual):
+def addRowinDFA(ano, disciplina, periodo, avaliacao, data, descricao, pontuacao, nota, percentual, turma, epoca):
 
     dfarow = {
               "Ano" : ano,
@@ -50,7 +50,9 @@ def addRowinDFA(ano, disciplina, periodo, avaliacao, data, descricao, pontuacao,
               "Descrição da Avaliação" : descricao,
               "Pontuação" : pontuacao,
               "Nota" : nota,
-              "%": percentual
+              "%": percentual,
+              "Turma": turma,
+              "Época": epoca
             }
 
     dfa.loc[len(dfa)] = dfarow
@@ -93,6 +95,7 @@ for a in lista_anos:
         for p in lista_periodos:
             query = "Ano == \'" + a + "\' & Disciplina == \'"+ d + "\' & Período == \'" + p + "\'"
             dff = df.query(query).sort_values(by=['Avaliação'], ascending=False)
+
             dff = dff[dff['Avaliação'] != 'Média da Turma']
 
             rec = dff[dff['Avaliação'] == 'Prova Recuperação Pós Trimestre']['Nota']
@@ -126,12 +129,10 @@ for a in lista_anos:
 
             # dfs = [dfa, dff]
             # dfa = pd.concat(dfs)
-            dfa = pd.concat([dfa, dff])
 
-            # print(dfa)
+            for row in dff.iterrows():
+                addRowinDFA(a, d, p, row[1]["Avaliação"], row[1]["Data da Avaliação"], row[1]["Descrição da Avaliação"], row[1]["Pontuação"], row[1]["Nota"], "NaN", row[1]["Turma"], row[1]["Época"])
 
-            # def addRowinDFA(ano, disciplina, periodo, avaliacao, data, descricao, pontuacao, nota, percentual):
-            # addRowinDFA(a, d, p, dff["Avaliação"], dff["Data da Avaliação"], dff["Descrição da Avaliação"], dff["Pontuação"], dff["Nota"], "")
 
         # addRowinTotals(a, d, "Média Final", float("{:.1f}".format(soma / len(lista_periodos))))
         addRowinTotals(a, d, "Média Final", float("{:.1f}".format(media_final)))
