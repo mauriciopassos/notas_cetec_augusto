@@ -20,8 +20,11 @@ server = app.server
 
 app.title = 'Notas CETEC Augusto Marques dos Passos'
 
-df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
-df_apo = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_pareceres_cetec_augusto.csv')
+# df = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_notas_cetec_augusto.csv')
+# df_apo = pd.read_csv('https://raw.githubusercontent.com/mauriciopassos/notas_cetec_augusto/main/src/df_pareceres_cetec_augusto.csv')
+df = pd.read_csv('https://github.com/mauriciopassos/notas_cetec_augusto/raw/refs/heads/main/src/df_notas_cetec_augusto.csv')
+df_apo = pd.read_csv('https://github.com/mauriciopassos/notas_cetec_augusto/raw/refs/heads/main/src/df_pareceres_cetec_augusto.csv')
+
 # df = pd.read_csv('src/df_notas_cetec_augusto.csv')
 # df_apo = pd.read_csv('src/df_pareceres_cetec_augusto.csv')
 
