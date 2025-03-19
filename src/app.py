@@ -38,6 +38,7 @@ ddc_disciplina_apo = dcc.Dropdown(id='id_dd_disciplina_apo', clearable=False, cl
 
 dtotals = pd.DataFrame(columns = ['Ano', 'Disciplina', 'Período', 'Nota'])
 dfa = pd.DataFrame(columns = ['Ano','Disciplina','Período','Avaliação','Data da Avaliação','Descrição da Avaliação','Pontuação','Nota','%','Turma','Época'])
+dfa['Nota'] = dfa['Nota'].astype(float)
 
 load_figure_template("sketchy")
 #*******************************************************************************************************
