@@ -131,7 +131,7 @@ for a in lista_anos:
             # dfa = pd.concat(dfs)
 
             for row in dff.iterrows():
-                addRowinDFA(a, d, p, row[1]["Avaliação"], row[1]["Data da Avaliação"], row[1]["Descrição da Avaliação"], row[1]["Pontuação"], row[1]["Nota"], "NaN", row[1]["Turma"], row[1]["Época"])
+                addRowinDFA(a, d, p, row[1]["Avaliação"], row[1]["Data da Avaliação"], row[1]["Descrição da Avaliação"], row[1]["Pontuação"], float("{:.1f}".format(row[1]["Nota"])), "NaN", row[1]["Turma"], row[1]["Época"])
 
 
         # addRowinTotals(a, d, "Média Final", float("{:.1f}".format(soma / len(lista_periodos))))
