@@ -182,7 +182,7 @@ app.layout = dbc.Container(
             children=[
                 dbc.Switch(
                     label ="Mostrar parciais no gráfico",
-                    value=False,cd 
+                    value=False,
                     id="id_check_graph",
                 ),
             ],style={"text-align": "left", "font-size": "0.875em"}
