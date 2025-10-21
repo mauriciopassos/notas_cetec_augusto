@@ -182,7 +182,7 @@ app.layout = dbc.Container(
             children=[
                 dbc.Switch(
                     label ="Mostrar parciais no gráfico",
-                    value=False,
+                    value=False,cd 
                     id="id_check_graph",
                 ),
             ],style={"text-align": "left", "font-size": "0.875em"}
@@ -203,7 +203,7 @@ app.layout = dbc.Container(
         html.Div(
             className="row", children=[
                 html.Div(className='four columns', children=[
-                    dcc.Dropdown(options=lista_periodos, value="2º Trimestre", id='id_dd_periodo', clearable=False, className="dbc"),
+                    dcc.Dropdown(options=lista_periodos, value="3º Trimestre", id='id_dd_periodo', clearable=False, className="dbc"),
                     # dbc.Select(options=lista_periodos, value="1º Trimestre", id='id_dd_periodo'),
                 ],style=dict(width='50%')),
                 
